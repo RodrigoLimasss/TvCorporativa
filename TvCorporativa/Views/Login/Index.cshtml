@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<head>
+    <title>Login - Tv Corporativa</title>
+</head>
+<h2>Bem-vindo</h2>
+
+<form action="~/Login/Autentica" method="post">
+@Html.ValidationMessage("login.Invalido")
+
+<input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+<label for="login">Login:</label>
+<input id="login" name="login" type="text" class="form-control" />
+    <br/><br/>
+<label for="senha">Senha:</label>
+<input id="senha" name="senha" type="password" class="form-control" />
+    <br/><br/>
+<input type="submit" value="Autenticar" />
+</form>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Tv Corporativa</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                @Html.ActionLink("Tv Corporativa", "Index", "Home", null, new { @class = "brand" })
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Template", "Index", "Template")</li>
+                        <li>@Html.ActionLink("Feed", "Index", "Feed")</li>
+                        <li>@Html.ActionLink("Midia", "Index", "Midia")</li>
+                        <li>@Html.ActionLink("PlayList", "Index", "PlayList")</li>
+                        <li>@Html.ActionLink("Admin", "Index", "Admin")
+                            <ul>
+                                <li>@Html.ActionLink("Empresas", "Index", "Empresa")</li>
+                                <li>@Html.ActionLink("Pontos", "Index", "Ponto")</li>
+                                <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                            </ul>                        
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Tv Corporativa</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
