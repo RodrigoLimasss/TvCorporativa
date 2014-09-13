@@ -144,6 +144,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PontoController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAL\TvContext.cs" />
     <Compile Include="DAO\BaseDao.cs" />
     <Compile Include="DAO\PontoDao.cs" />
@@ -258,6 +259,11 @@
     <Content Include="Views\Ponto\Details.cshtml" />
     <Content Include="Views\Ponto\Edit.cshtml" />
     <Content Include="Views\Ponto\Index.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Delete.cshtml" />
+    <Content Include="Views\Usuario\Details.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

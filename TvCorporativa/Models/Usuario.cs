@@ -6,7 +6,7 @@ namespace TvCorporativa.Models
     public class Usuario
     {
         [Column("Id_Usuario")]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Senha { get; set; }
         public bool Status { get; set; }
@@ -17,6 +17,9 @@ namespace TvCorporativa.Models
         public string Email { get; set; }
         public string Sexo { get; set; }
         public string Telefone { get; set; }
-        public virtual Empresa Empresa { get; set; }
+
+        [Column("Id_Empresa")]
+        public int IdEmpresa { get; set; }
+        //public virtual Empresa Empresa { get; set; }
     }
 }
