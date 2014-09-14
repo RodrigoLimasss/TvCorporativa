@@ -12,5 +12,15 @@ namespace TvCorporativa.DAO
         public UsuarioDao(TvContext context) : base(context)
         {
         }
+
+        public Usuario RetornaUsuario(string email, string senha)
+        {
+            var query = from u in Context.Usuarios
+                where u.Email.Equals(email)
+                      && u.Senha.Equals(senha)
+                select u;
+
+            return query.FirstOrDefault();
+        }
     }
 }

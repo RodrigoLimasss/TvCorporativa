@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Models;
-using TvCorporativa.DAL;
 using TvCorporativa.DAO;
 
 namespace TvCorporativa.Controllers
@@ -115,7 +108,7 @@ namespace TvCorporativa.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = _usuarioDao.Get((int)id);
+            Usuario usuario = _usuarioDao.Get(id);
             _usuarioDao.Delete(usuario);
            
             return RedirectToAction("Index");

@@ -3,31 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TvCorporativa.DAO;
+using WebMatrix.WebData;
 
 namespace TvCorporativa.Controllers
 {
     public class LoginController : Controller
     {
-        public LoginController()
+        private readonly UsuarioDao _usuarioDao;
+
+        public LoginController(UsuarioDao usuarioDao)
         {
-            //if (!WebSecurity.Initialized)
-            //{
-            //    WebSecurity.InitializeDatabaseConnection("TvCorporativaConection", "Usuario", "Id_Usuario", "Nome", true);
-            //}
+            _usuarioDao = usuarioDao;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         public ActionResult Autentica(string login, string senha)
         {
-            //if (WebSecurity.Login(login, senha))
-            //    return RedirectToAction("Index", "Home");
-            
-            //ModelState.AddModelError("login.Invalido", "Login ou senha incorretos");
-            return RedirectToAction("Index", "Home");
+            var usuarioValido = _usuarioDao.RetornaUsuario(login, senha);
+
+            if (usuarioValido != null)
+            {
+                Session["UsuarioLogado"] = usuarioValido;
+                return RedirectToAction("Index", "Home");
+            }
+
+            ModelState.AddModelError("login.Invalido", "Login ou senha incorretos");
+            return View("Index");
         }
     }
 }
