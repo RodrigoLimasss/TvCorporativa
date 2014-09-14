@@ -141,8 +141,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MidiaController.cs" />
     <Compile Include="Controllers\PontoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAL\TvContext.cs" />
@@ -264,6 +266,16 @@
     <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Feed\Create.cshtml" />
+    <Content Include="Views\Feed\Delete.cshtml" />
+    <Content Include="Views\Feed\Details.cshtml" />
+    <Content Include="Views\Feed\Edit.cshtml" />
+    <Content Include="Views\Feed\Index.cshtml" />
+    <Content Include="Views\Midia\Create.cshtml" />
+    <Content Include="Views\Midia\Delete.cshtml" />
+    <Content Include="Views\Midia\Details.cshtml" />
+    <Content Include="Views\Midia\Edit.cshtml" />
+    <Content Include="Views\Midia\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
