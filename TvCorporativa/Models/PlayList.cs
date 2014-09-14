@@ -8,7 +8,7 @@ namespace TvCorporativa.Models
     public class PlayList
     {
         [Column("Id_PlayList")]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public bool Status { get; set; }
 
