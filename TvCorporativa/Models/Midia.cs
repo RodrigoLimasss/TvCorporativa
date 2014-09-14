@@ -9,7 +9,7 @@ namespace TvCorporativa.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Extensao { get; set; }
-        public int Tamanho { get; set; }
+        public double Tamanho { get; set; }
         public virtual ICollection<PlayList> PlayLists { get; set; }
     }
 }
