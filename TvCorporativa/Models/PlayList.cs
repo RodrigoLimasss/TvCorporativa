@@ -20,6 +20,10 @@ namespace TvCorporativa.Models
 
         [Column("Data_Fim")]
         public DateTime DataFim { get; set; }
+
+        [Column("Id_Usuario")]
+        public int IdUsuario { get; set; }
+
         public virtual ICollection<Midia> Midias { get; set; }
     }
 }
