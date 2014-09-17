@@ -17,12 +17,16 @@ namespace TvCorporativa.DAO
 
         public T Save(T entity)
         {
-            throw new NotImplementedException();
+            var newEntity = Context.Set<T>().Add(entity);
+            Context.SaveChanges();
+            return newEntity;
         }
 
-        public T SaveColection(IList<T> colection)
+        public IList<T> SaveColection(IList<T> colection)
         {
-            throw new NotImplementedException();
+            var newEntitys = Context.Set<T>().AddRange(colection).ToList();
+            Context.SaveChanges();
+            return newEntitys;
         }
 
         public IList<T> GetAll()
@@ -30,24 +34,21 @@ namespace TvCorporativa.DAO
             return Context.Set<T>().ToList();
         }
 
-        public T Get(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public T Get(int id)
         {
-            throw new NotImplementedException();
+            return Context.Set<T>().Find(id);
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            Context.Set<T>().Remove(entity);
+            Context.SaveChanges();
         }
 
         public void DeleteColection(IList<T> colection)
         {
-            throw new NotImplementedException();
+            Context.Set<T>().RemoveRange(colection);
+            Context.SaveChanges();
         }
     }
 }

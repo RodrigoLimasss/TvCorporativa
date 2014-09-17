@@ -24,7 +24,5 @@ namespace TvCorporativa.DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public System.Data.Entity.DbSet<TvCorporativa.Models.PlayList> PlayLists { get; set; }
-
     }
 }

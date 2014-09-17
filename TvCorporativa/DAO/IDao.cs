@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TvCorporativa.DAO
 {
     public interface IDao<T> where T : class
     {
         T Save(T entity);
-        T SaveColection(IList<T> colection);
+        IList<T> SaveColection(IList<T> colection);
 
         IList<T> GetAll();
-        T Get(T entity);
         T Get(int id);
         
         void Delete(T entity);
