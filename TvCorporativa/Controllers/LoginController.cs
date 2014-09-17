@@ -36,5 +36,11 @@ namespace TvCorporativa.Controllers
             ModelState.AddModelError("login.Invalido", "Login ou senha incorretos");
             return View("Index");
         }
+
+        public ActionResult Logout()
+        {
+            Session["UsuarioLogado"] = null;
+            return View("Index");
+        }
     }
 }
