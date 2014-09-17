@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Models;
-using TvCorporativa.DAL;
 using TvCorporativa.DAO;
 
 namespace TvCorporativa.Controllers
@@ -23,7 +16,8 @@ namespace TvCorporativa.Controllers
         // GET: /PlayList/
         public ActionResult Index()
         {
-            return View(_playListDao.GetAll());
+            var usuario = new Usuario {Id = 1};
+            return View(_playListDao.GetAll(usuario));
         }
 
         // GET: /PlayList/Details/5
