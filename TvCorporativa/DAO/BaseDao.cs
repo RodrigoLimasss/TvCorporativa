@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TvCorporativa.DAL;
+using TvCorporativa.Models;
 
 namespace TvCorporativa.DAO
 {
@@ -33,6 +34,8 @@ namespace TvCorporativa.DAO
         {
             return Context.Set<T>().ToList();
         }
+
+        public abstract IList<T> GetAll(Usuario usuario);
 
         public T Get(int id)
         {

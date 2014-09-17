@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
 
@@ -11,6 +8,11 @@ namespace TvCorporativa.DAO
     {
         public PontoDao(TvContext context) : base(context)
         {
+        }
+
+        public override IList<Ponto> GetAll(Usuario usuario)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

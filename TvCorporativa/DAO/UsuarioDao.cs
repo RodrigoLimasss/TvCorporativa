@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
 
@@ -21,6 +19,11 @@ namespace TvCorporativa.DAO
                 select u;
 
             return query.FirstOrDefault();
+        }
+
+        public override IList<Usuario> GetAll(Usuario usuario)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
