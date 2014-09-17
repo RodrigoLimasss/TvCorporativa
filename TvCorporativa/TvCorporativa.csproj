@@ -148,6 +148,7 @@
     <Compile Include="Controllers\MidiaController.cs" />
     <Compile Include="Controllers\PlayListController.cs" />
     <Compile Include="Controllers\PontoController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAL\TvContext.cs" />
     <Compile Include="DAO\BaseDao.cs" />
@@ -284,6 +285,11 @@
     <Content Include="Views\PlayList\Details.cshtml" />
     <Content Include="Views\PlayList\Edit.cshtml" />
     <Content Include="Views\PlayList\Index.cshtml" />
+    <Content Include="Views\Template\Create.cshtml" />
+    <Content Include="Views\Template\Delete.cshtml" />
+    <Content Include="Views\Template\Details.cshtml" />
+    <Content Include="Views\Template\Edit.cshtml" />
+    <Content Include="Views\Template\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
