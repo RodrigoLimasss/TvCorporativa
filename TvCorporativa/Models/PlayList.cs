@@ -24,6 +24,8 @@ namespace TvCorporativa.Models
         [Column("Id_Empresa")]
         public int IdEmpresa { get; set; }
 
+        public virtual Empresa Empresa { get; set; }
+
         public virtual ICollection<Midia> Midias { get; set; }
     }
 }

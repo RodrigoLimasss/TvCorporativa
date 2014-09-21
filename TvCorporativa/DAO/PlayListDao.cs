@@ -14,7 +14,7 @@ namespace TvCorporativa.DAO
         public override IList<PlayList> GetAll(Empresa empresa)
         {
             return (from p in Context.PlayList
-                where p.IdEmpresa.Equals(empresa.Id)
+                where p.Empresa.Id.Equals(empresa.Id)
                 select p).ToList();
         }
     }

@@ -23,6 +23,13 @@ namespace TvCorporativa.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<PlayList>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
+            modelBuilder.Entity<Usuario>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
+            modelBuilder.Entity<Feed>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
+            modelBuilder.Entity<Midia>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
+            modelBuilder.Entity<Ponto>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
+            modelBuilder.Entity<Ponto>().HasRequired(x => x.Template).WithMany().HasForeignKey(x => x.IdTemplate);
         }
 
     }
