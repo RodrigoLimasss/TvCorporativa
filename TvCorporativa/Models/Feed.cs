@@ -10,8 +10,8 @@ namespace TvCorporativa.Models
         public string Nome { get; set; }
         public string Endereco { get; set; }
 
-        [Column("Id_Usuario")]
-        public int IdUsuario { get; set; }
+        [Column("Id_Empresa")]
+        public int IdEmpresa { get; set; }
         public virtual ICollection<Ponto> Pontos { get; set; }
     }
 }

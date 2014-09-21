@@ -11,8 +11,8 @@ namespace TvCorporativa.Models
         public string Extensao { get; set; }
         public double Tamanho { get; set; }
 
-        [Column("Id_Usuario")]
-        public int IdUsuario { get; set; }
+        [Column("Id_Empresa")]
+        public int IdEmpresa { get; set; }
         public virtual ICollection<PlayList> PlayLists { get; set; }
     }
 }
