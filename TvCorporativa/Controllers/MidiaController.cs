@@ -18,7 +18,7 @@ namespace TvCorporativa.Controllers
         // GET: /Midia/
         public ActionResult Index()
         {
-            return View(_midiaDao.GetAll());
+            return View(_midiaDao.GetAll(UsuarioLogado.Empresa));
         }
 
         // GET: /Midia/Details/5
