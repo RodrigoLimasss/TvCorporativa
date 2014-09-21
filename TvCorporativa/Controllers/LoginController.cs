@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using TvCorporativa.Controllers.Base;
 using TvCorporativa.DAO;
-using WebMatrix.WebData;
 
 namespace TvCorporativa.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         private readonly UsuarioDao _usuarioDao;
 

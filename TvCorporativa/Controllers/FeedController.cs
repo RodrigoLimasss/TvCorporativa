@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
+using TvCorporativa.Controllers.Base;
 using TvCorporativa.Models;
-using TvCorporativa.DAL;
 using TvCorporativa.DAO;
 
 namespace TvCorporativa.Controllers
 {
-    public class FeedController : Controller
+    public class FeedController : BaseController
     {
         private readonly FeedDao _feedDao;
 

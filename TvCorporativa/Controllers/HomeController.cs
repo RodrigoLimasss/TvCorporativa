@@ -1,8 +1,9 @@
 ﻿using System.Web.Mvc;
+using TvCorporativa.Controllers.Base;
 
 namespace TvCorporativa.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public HomeController()
         {

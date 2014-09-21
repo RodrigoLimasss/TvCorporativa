@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using TvCorporativa.Controllers.Base;
 using TvCorporativa.Models;
 using TvCorporativa.DAO;
 
 namespace TvCorporativa.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : BaseController
     {
         private readonly UsuarioDao _usuarioDao;
 

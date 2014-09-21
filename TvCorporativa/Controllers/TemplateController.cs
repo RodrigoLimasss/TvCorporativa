@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using TvCorporativa.Controllers.Base;
 using TvCorporativa.DAO;
 using TvCorporativa.Models;
 
 namespace TvCorporativa.Controllers
 {
-    public class TemplateController : Controller
+    public class TemplateController : BaseController
     {
         private readonly TemplateDao _templateDao;
 

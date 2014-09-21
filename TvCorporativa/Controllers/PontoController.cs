@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
+using TvCorporativa.Controllers.Base;
 using TvCorporativa.DAO;
 using TvCorporativa.Models;
-using TvCorporativa.DAL;
 
 namespace TvCorporativa.Controllers
 {
-    public class PontoController : Controller
+    public class PontoController : BaseController
     {
         private readonly PontoDao _pontoDao;
 

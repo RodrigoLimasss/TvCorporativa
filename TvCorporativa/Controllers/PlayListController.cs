@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using TvCorporativa.Controllers.Base;
 using TvCorporativa.Models;
 using TvCorporativa.DAO;
 
 namespace TvCorporativa.Controllers
 {
-    public class PlayListController : Controller
+    public class PlayListController : BaseController
     {
         private readonly PlayListDao _playListDao;
 
