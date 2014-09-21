@@ -9,7 +9,7 @@ namespace TvCorporativa.DAO
         IList<T> SaveColection(IList<T> colection);
 
         IList<T> GetAll();
-        IList<T> GetAll(Usuario usuario);
+        IList<T> GetAll(Empresa empresa);
         T Get(int id);
         
         void Delete(T entity);

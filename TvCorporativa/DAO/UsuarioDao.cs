@@ -21,7 +21,7 @@ namespace TvCorporativa.DAO
             return query.FirstOrDefault();
         }
 
-        public override IList<Usuario> GetAll(Usuario usuario)
+        public override IList<Usuario> GetAll(Empresa empresa)
         {
             throw new System.NotImplementedException();
         }

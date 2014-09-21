@@ -10,7 +10,7 @@ namespace TvCorporativa.DAO
         {
         }
 
-        public override IList<Template> GetAll(Usuario usuario)
+        public override IList<Template> GetAll(Empresa empresa)
         {
             throw new System.NotImplementedException();
         }

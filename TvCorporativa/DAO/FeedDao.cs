@@ -9,8 +9,7 @@ namespace TvCorporativa.DAO
         public FeedDao(TvContext context) : base(context)
         {
         }
-
-        public override IList<Feed> GetAll(Usuario usuario)
+        public override IList<Feed> GetAll(Empresa empresa)
         {
             throw new System.NotImplementedException();
         }

@@ -10,7 +10,7 @@ namespace TvCorporativa.DAO
         {
         }
 
-        public override IList<Midia> GetAll(Usuario usuario)
+        public override IList<Midia> GetAll(Empresa empresa)
         {
             throw new System.NotImplementedException();
         }

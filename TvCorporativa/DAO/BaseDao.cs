@@ -35,7 +35,7 @@ namespace TvCorporativa.DAO
             return Context.Set<T>().ToList();
         }
 
-        public abstract IList<T> GetAll(Usuario usuario);
+        public abstract IList<T> GetAll(Empresa empresa);
 
         public T Get(int id)
         {
