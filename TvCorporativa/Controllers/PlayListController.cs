@@ -16,8 +16,8 @@ namespace TvCorporativa.Controllers
         // GET: /PlayList/
         public ActionResult Index()
         {
-            var usuario = new Usuario {Id = 1};
-            return View(_playListDao.GetAll(usuario));
+            var empresa = new Empresa{Id = 1};
+            return View(_playListDao.GetAll(empresa));
         }
 
         // GET: /PlayList/Details/5

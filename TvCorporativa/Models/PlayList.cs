@@ -21,8 +21,8 @@ namespace TvCorporativa.Models
         [Column("Data_Fim")]
         public DateTime DataFim { get; set; }
 
-        [Column("Id_Usuario")]
-        public int IdUsuario { get; set; }
+        [Column("Id_Empresa")]
+        public int IdEmpresa { get; set; }
 
         public virtual ICollection<Midia> Midias { get; set; }
     }

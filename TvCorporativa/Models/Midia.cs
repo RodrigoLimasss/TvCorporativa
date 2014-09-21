@@ -10,6 +10,9 @@ namespace TvCorporativa.Models
         public string Nome { get; set; }
         public string Extensao { get; set; }
         public double Tamanho { get; set; }
+
+        [Column("Id_Usuario")]
+        public int IdUsuario { get; set; }
         public virtual ICollection<PlayList> PlayLists { get; set; }
     }
 }
