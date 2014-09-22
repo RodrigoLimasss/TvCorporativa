@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Web;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
 
@@ -18,9 +18,17 @@ namespace TvCorporativa.DAO
 
         public T Save(T entity)
         {
-            var newEntity = Context.Set<T>().Add(entity);
+            if (Context.Entry(entity).State == EntityState.Detached)
+            {
+                Context.Set<T>().Attach(entity);
+                Context.Entry(entity).State = EntityState.Modified;
+            }
+            else
+                Context.Set<T>().Add(entity);
+
             Context.SaveChanges();
-            return newEntity;
+            
+            return entity;
         }
 
         public IList<T> SaveColection(IList<T> colection)

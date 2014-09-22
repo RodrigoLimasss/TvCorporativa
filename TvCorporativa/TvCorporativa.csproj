@@ -282,8 +282,6 @@
     <Content Include="Views\Midia\Edit.cshtml" />
     <Content Include="Views\Midia\Index.cshtml" />
     <Content Include="Views\PlayList\Create.cshtml" />
-    <Content Include="Views\PlayList\Delete.cshtml" />
-    <Content Include="Views\PlayList\Details.cshtml" />
     <Content Include="Views\PlayList\Edit.cshtml" />
     <Content Include="Views\PlayList\Index.cshtml" />
     <Content Include="Views\Template\Create.cshtml" />

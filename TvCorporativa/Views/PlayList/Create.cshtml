@@ -7,8 +7,8 @@
 <h2>Criar PlayList</h2>
 
 
-@using (Html.BeginForm()) 
-{
+@using (Html.BeginForm("Create", "PlayList", FormMethod.Post)) 
+{ 
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -69,4 +69,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        Globalize.culture("pt-BR");
+    </script>
 }
