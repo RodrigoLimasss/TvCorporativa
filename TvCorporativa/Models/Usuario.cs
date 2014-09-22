@@ -20,6 +20,6 @@ namespace TvCorporativa.Models
 
         [Column("Id_Empresa")]
         public int IdEmpresa { get; set; }
-        public Empresa Empresa { get; private set; }
+        public virtual Empresa Empresa { get; set; }
     }
 }

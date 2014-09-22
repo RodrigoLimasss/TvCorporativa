@@ -12,7 +12,7 @@ namespace TvCorporativa.Models
 
         [Column("Id_Empresa")]
         public int IdEmpresa { get; set; }
-        public Empresa Empresa { get; private set; }
-        public ICollection<Ponto> Pontos { get; set; }
+        public virtual Empresa Empresa { get; private set; }
+        public virtual ICollection<Ponto> Pontos { get; set; }
     }
 }

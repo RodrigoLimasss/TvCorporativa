@@ -13,7 +13,7 @@ namespace TvCorporativa.Models
 
         [Column("Id_Empresa")]
         public int IdEmpresa { get; set; }
-        public Empresa Empresa { get; private set; }
-        public ICollection<PlayList> PlayLists { get; set; }
+        public virtual Empresa Empresa { get; private set; }
+        public virtual ICollection<PlayList> PlayLists { get; set; }
     }
 }

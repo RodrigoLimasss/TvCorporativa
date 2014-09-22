@@ -14,11 +14,11 @@ namespace TvCorporativa.Models
 
         [Column("Id_Empresa")]
         public int IdEmpresa { get; set; }
-        public Empresa Empresa { get; private set; }
+        public virtual Empresa Empresa { get; private set; }
 
         [Column("Id_Template")]
         public int IdTemplate { get; set; }
-        public Template Template { get; private set; }
-        public ICollection<Feed> Feeds { get; set; }
+        public virtual Template Template { get; private set; }
+        public virtual ICollection<Feed> Feeds { get; set; }
     }
 }
