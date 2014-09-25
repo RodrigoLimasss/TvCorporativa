@@ -1,63 +1,62 @@
-﻿@model IList<TvCorporativa.Models.Empresa>
-
-@{
-    ViewBag.Title = "Empresas";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Empresas</h2>
-
-<p>
-    @Html.ActionLink("Nova Empresas", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            Status
-        </th>
-        <th>
-            Nome
-        </th>
-        <th>
-            DataCriacao
-        </th>
-        <th>
-            Endereco
-        </th>
-        <th>
-            Telefone
-        </th>
-        <th>
-            Cnpj
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.CheckBox("Status", item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCriacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cnpj)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+﻿@model IEnumerable<TvCorporativa.Models.Empresa>
+    @{
+        ViewBag.Title = "Empresas";
+        Layout = "~/Views/Shared/_Layout.cshtml";
     }
+
+    <h2>Empresas</h2>
+
+    <p>
+        @Html.ActionLink("Criar Empresa", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Status
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Data Criação
+            </th>
+            <th>
+                Endereço
+            </th>
+            <th>
+                Telefone
+            </th>
+            <th>
+                Cnpj
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("Status", item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </table>

@@ -175,6 +175,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\Login.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -230,8 +234,14 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -262,33 +272,24 @@
     <Content Include="Views\Empresa\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Ponto\Create.cshtml" />
-    <Content Include="Views\Ponto\Delete.cshtml" />
-    <Content Include="Views\Ponto\Details.cshtml" />
     <Content Include="Views\Ponto\Edit.cshtml" />
     <Content Include="Views\Ponto\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
-    <Content Include="Views\Usuario\Delete.cshtml" />
-    <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Feed\Create.cshtml" />
-    <Content Include="Views\Feed\Delete.cshtml" />
-    <Content Include="Views\Feed\Details.cshtml" />
     <Content Include="Views\Feed\Edit.cshtml" />
     <Content Include="Views\Feed\Index.cshtml" />
     <Content Include="Views\Midia\Create.cshtml" />
-    <Content Include="Views\Midia\Delete.cshtml" />
-    <Content Include="Views\Midia\Details.cshtml" />
     <Content Include="Views\Midia\Edit.cshtml" />
     <Content Include="Views\Midia\Index.cshtml" />
     <Content Include="Views\PlayList\Create.cshtml" />
     <Content Include="Views\PlayList\Edit.cshtml" />
     <Content Include="Views\PlayList\Index.cshtml" />
     <Content Include="Views\Template\Create.cshtml" />
-    <Content Include="Views\Template\Delete.cshtml" />
-    <Content Include="Views\Template\Details.cshtml" />
     <Content Include="Views\Template\Edit.cshtml" />
     <Content Include="Views\Template\Index.cshtml" />
+    <Content Include="Views\Shared\_Head.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

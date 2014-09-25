@@ -1,30 +1,21 @@
 ﻿@model TvCorporativa.Models.PlayList
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar PlayList";
 }
 
-<h2>Edit</h2>
+<h2>Editar PlayList</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "PlayList", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>PlayList</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome)
-                @Html.ValidationMessageFor(model => model.Nome)
-            </div>
-        </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -34,7 +25,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DataCriacao, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome)
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.Label("Data Criação", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DataCriacao)
                 @Html.ValidationMessageFor(model => model.DataCriacao)
@@ -42,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DataInicio, new { @class = "control-label col-md-2" })
+            @Html.Label("Data Início", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DataInicio)
                 @Html.ValidationMessageFor(model => model.DataInicio)
@@ -50,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DataFim, new { @class = "control-label col-md-2" })
+            @Html.Label("Data Fim", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DataFim)
                 @Html.ValidationMessageFor(model => model.DataFim)
@@ -59,16 +58,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar para lista", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

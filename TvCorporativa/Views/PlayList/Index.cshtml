@@ -9,48 +9,51 @@
 <p>
     @Html.ActionLink("Criar PlayList", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>        
-        <th>
-            @Html.DisplayNameFor(model => model.DataCriacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataInicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataFim)
-        </th>
-        <th></th>
-    </tr>
+                      <div class="table-responsive">
+                          <table class="table">
+                              <tr>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Status)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Nome)
+                                  </th>
+                                  <th>
+                                      @Html.Label("Data Criação")
+                                  </th>
+                                  <th>
+                                      @Html.Label("Data Início")
+                                  </th>
+                                  <th>
+                                      @Html.Label("Data Fim")
+                                  </th>
+                                  <th></th>
+                              </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.CheckBox("Status", item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>        
-        <td>
-            @Html.DisplayFor(modelItem => item.DataCriacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataFim)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');" })
-        </td>
-    </tr>
-}
+                              @foreach (var item in Model)
+                              {
+                                  <tr>
+                                      <td>
+                                          @Html.CheckBox("Status", item.Status)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Nome)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.DataCriacao)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.DataInicio)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.DataFim)
+                                      </td>
+                                      <td>
+                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');" })
+                                      </td>
+                                  </tr>
+                              }
 
-</table>
+                          </table>
+                      </div>

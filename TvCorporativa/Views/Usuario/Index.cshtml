@@ -7,7 +7,7 @@
 <h2>Usuários</h2>
 
 <p>
-    @Html.ActionLink("Novo Usuário", "Create")
+    @Html.ActionLink("Criar Usuário", "Create")
 </p>
 <table class="table">
     <tr>
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Empresa)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DataCadastro)
+           @Html.Label("Data Cadastro")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -68,7 +68,7 @@
             @Html.DisplayFor(modelItem => item.Telefone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Administrador)
+            @Html.Label(item.Administrador ? "Sim" : "Não")
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |

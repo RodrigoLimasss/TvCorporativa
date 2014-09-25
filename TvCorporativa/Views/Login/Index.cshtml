@@ -5,20 +5,24 @@
 
 <head>
     <title>Login - Tv Corporativa</title>
+    @RenderPage("~/Views/Shared/_Head.cshtml")
+    <link href="@Url.Content("~/Content/css/Login.css")" rel="stylesheet" />
 </head>
-<h2>Bem-vindo</h2>
 
-<form action="~/Login/Autentica" method="post">
-    @Html.ValidationMessage("login.Invalido")
-    <br /><br />
-<input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+<body>
+    <div class="container">
+        <h2 class="form-signin-heading">Bem vindo a Tv Corporativa</h2>
+        <form class="form-signin" action="~/Login/Autentica" role="form">
+            <h2 class="form-signin-heading">Login</h2>
+            <input type="email" name="login" class="form-control" placeholder="E-mail" required="" autofocus="">
+            <input type="password" name="senha" class="form-control" placeholder="Senha" required="">
+            @*<label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>*@
+            <br />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+            @Html.ValidationMessage("login.Invalido")
+        </form>
 
-<label for="login">E-mail:</label>
-<input id="login" name="login" type="text" class="form-control" />
-    <br/><br/>
-<label for="senha">Senha:</label>
-<input id="senha" name="senha" type="password" class="form-control" />
-    <br/><br/>
-   
-<input type="submit" value="Entrar" />
-</form>
+    </div>
+</body>

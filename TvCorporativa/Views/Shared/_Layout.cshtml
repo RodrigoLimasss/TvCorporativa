@@ -1,48 +1,59 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var usuarioLogado = ((TvCorporativa.Models.Usuario)Session["UsuarioLogado"]);
+}
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - Tv Corporativa</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title - Tv Corporativa</title>
+        @RenderPage("_Head.cshtml")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                @Html.ActionLink("Tv Corporativa", "Index", "Home", null, new { @class = "brand" })
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("PlayList", "Index", "PlayList")</li>
-                        <li>@Html.ActionLink("Feed", "Index", "Feed")</li>
-                        <li>@Html.ActionLink("Midia", "Index", "Midia")</li>
-                        <li>@Html.Label("Admin")
-                            <ul>
-                                <li>@Html.ActionLink("Empresas", "Index", "Empresa")</li>
-                                <li>@Html.ActionLink("Pontos", "Index", "Ponto")</li>
-                                <li>@Html.ActionLink("Template", "Index", "Template")</li>
-                                <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
-                            </ul>                        
-                        </li>
-                    </ul>
+                <div class="navbar-header">
+                    @Html.ActionLink("Tv Corporativa", "Index", "Home", null, new { @class = "navbar-brand" })
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                 </div>
-                @Html.ActionLink("Sair", "Logout", "Login")
+            
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("PlayLists", "Index", "PlayList")</li>
+                        <li>@Html.ActionLink("Feeds", "Index", "Feed")</li>
+                        <li>@Html.ActionLink("Mídias", "Index", "Midia")</li>
+                        
+                        @if (usuarioLogado.Administrador)
+                        {
+                            <li>@Html.ActionLink("Empresas", "Index", "Empresa")</li>
+                            <li>@Html.ActionLink("Pontos", "Index", "Ponto")</li>
+                            <li>@Html.ActionLink("Templates", "Index", "Template")</li>
+                            <li>@Html.ActionLink("Usuários", "Index", "Usuario")</li>
+                        }
+                        <li></li>
+                    </ul>
+                    <div class="pull-right">
+                        @Html.Label("Email", usuarioLogado.Email.ToLower(), new { @class = "navbar-brand" })
+                        @Html.ActionLink("| Sair", "Logout", "Login", null, new { @class = "navbar-brand" })
+                    </div>
+                </div>
+                
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Tv Corporativa</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+        <div class="container">
+            @RenderBody()
+            
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Tv Corporativa</p>
+            </footer>
+        </div>
+    </body>
 </html>
+
