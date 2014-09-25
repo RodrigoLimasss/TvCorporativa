@@ -10,36 +10,39 @@
 <p>
     @Html.ActionLink("Criar Ponto", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>  
-        <th>
-            @Html.DisplayNameFor(model => model.Empresa)
-        </th>      
-        <th></th>
-    </tr>
+                      <div class="table-responsive">
+                          <table class="table">
+                              <tr>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Status)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Nome)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Empresa)
+                                  </th>
+                                  <th></th>
+                              </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.CheckBox("Status", item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>   
-        <td>
-            @Html.DisplayFor(modelItem => item.Empresa.Nome)
-        </td>     
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+                              @foreach (var item in Model)
+                              {
+                                  <tr>
+                                      <td>
+                                          @Html.CheckBox("Status", item.Status)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Nome)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Empresa.Nome)
+                                      </td>
+                                      <td>
+                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+                                      </td>
+                                  </tr>
+                              }
 
-</table>
+                          </table>
+</div>

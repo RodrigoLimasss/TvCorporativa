@@ -9,72 +9,75 @@
 <p>
     @Html.ActionLink("Criar Usuário", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Empresa)
-        </th>
-        <th>
-           @Html.Label("Data Cadastro")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Senha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sexo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Administrador)
-        </th>
-        <th></th>
-    </tr>
+                      <div class="table-responsive">
+                          <table class="table">
+                              <tr>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Status)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Nome)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Empresa)
+                                  </th>
+                                  <th>
+                                      @Html.Label("Data Cadastro")
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Email)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Senha)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Sexo)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Telefone)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Administrador)
+                                  </th>
+                                  <th></th>
+                              </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.CheckBox("Status", item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empresa.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataCadastro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Senha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sexo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefone)
-        </td>
-        <td>
-            @Html.Label(item.Administrador ? "Sim" : "Não")
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+                              @foreach (var item in Model)
+                              {
+                                  <tr>
+                                      <td>
+                                          @Html.CheckBox("Status", item.Status)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Nome)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Empresa.Nome)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.DataCadastro)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Email)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Senha)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Sexo)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Telefone)
+                                      </td>
+                                      <td>
+                                          @Html.Label(item.Administrador ? "Sim" : "Não")
+                                      </td>
+                                      <td>
+                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+                                      </td>
+                                  </tr>
+                              }
 
-</table>
+                          </table>
+</div>
