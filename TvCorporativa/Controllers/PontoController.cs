@@ -18,6 +18,9 @@ namespace TvCorporativa.Controllers
         // GET: /Ponto/
         public ActionResult Index()
         {
+            if (!UsuarioLogado.Administrador)
+                return RedirectToAction("Index", "Home");
+
             var pontos = _pontoDao.GetAll();
             return View(pontos);
         }

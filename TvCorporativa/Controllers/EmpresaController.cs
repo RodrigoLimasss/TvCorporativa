@@ -1,9 +1,10 @@
 ﻿using System.Web.Mvc;
+using TvCorporativa.Controllers.Base;
 using TvCorporativa.DAO;
 
 namespace TvCorporativa.Controllers
 {
-    public class EmpresaController : Controller
+    public class EmpresaController : BaseController
     {
         private readonly EmpresaDao _empresaDao;
 
@@ -17,6 +18,9 @@ namespace TvCorporativa.Controllers
 
         public ActionResult Index()
         {
+            if (!UsuarioLogado.Administrador)
+                return RedirectToAction("Index", "Home");
+
             var empresas = _empresaDao.GetAll();
    
             return View(empresas);

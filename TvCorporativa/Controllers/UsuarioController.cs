@@ -18,6 +18,9 @@ namespace TvCorporativa.Controllers
         // GET: /Usuario/
         public ActionResult Index()
         {
+            if (!UsuarioLogado.Administrador)
+                return RedirectToAction("Index", "Home");
+
             return View(_usuarioDao.GetAll());
         }
 
