@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -18,24 +19,37 @@ namespace TvCorporativa.DAO
 
         public T Save(T entity)
         {
-            if (Context.Entry(entity).State == EntityState.Detached)
+            if (Int32.Parse((entity).GetType().GetProperty("Id").GetValue(entity).ToString()) > 0)
             {
                 Context.Set<T>().Attach(entity);
                 Context.Entry(entity).State = EntityState.Modified;
             }
             else
+            {
                 Context.Set<T>().Add(entity);
+            }
 
             Context.SaveChanges();
-            
             return entity;
         }
 
         public IList<T> SaveColection(IList<T> colection)
         {
-            var newEntitys = Context.Set<T>().AddRange(colection).ToList();
+            foreach (var entity in colection)
+            {
+                if (Int32.Parse((entity).GetType().GetProperty("Id").GetValue(entity).ToString()) > 0)
+                {
+                    Context.Set<T>().Attach(entity);
+                    Context.Entry(entity).State = EntityState.Modified;
+                }
+                else
+                {
+                    Context.Set<T>().Add(entity);
+                }
+            }
+
             Context.SaveChanges();
-            return newEntitys;
+            return colection;
         }
 
         public IList<T> GetAll()
