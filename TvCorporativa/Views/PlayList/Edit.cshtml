@@ -15,6 +15,8 @@
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.IdEmpresa)
+        @Html.HiddenFor(model => model.DataCriacao)
         
         <div class="form-group">
             @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
@@ -31,28 +33,29 @@
                 @Html.ValidationMessageFor(model => model.Nome)
             </div>
         </div>
-        
-        <div class="form-group">
-            @Html.Label("Data Criação", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DataCriacao)
-                @Html.ValidationMessageFor(model => model.DataCriacao)
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.Label("Data Início", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DataInicio)
+                @Html.TextBoxFor(model => model.DataInicio, "{0:dd/MM/yyyy}", new { @class = "datepiker maskData width120" })
                 @Html.ValidationMessageFor(model => model.DataInicio)
+                @Html.TextBox("HoraInicio", Model.DataInicio, "{0:HH:mm}", new { @class = "maskHora width50" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Data Fim", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DataFim)
+                @Html.TextBoxFor(model => model.DataFim, "{0:dd/MM/yyyy}", new { @class = "datepiker maskData width120" })
                 @Html.ValidationMessageFor(model => model.DataFim)
+                @Html.TextBox("HoraFim", Model.DataFim, "{0:HH:mm}", new { @class = "maskHora width50" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.Label("Data Criação", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.DataCriacao, new { @class = "col-md-2" })
             </div>
         </div>
 

@@ -17,5 +17,17 @@ namespace TvCorporativa.DAO
                 where p.Empresa.Id.Equals(empresa.Id)
                 select p).ToList();
         }
+
+        public IList<PlayList> GetAll(Empresa empresa, bool orderByDesc)
+        {
+            var query = (from p in Context.PlayList
+                    where p.Empresa.Id.Equals(empresa.Id)
+                    select p);
+
+            if (orderByDesc)
+                query = query.OrderByDescending(p => p.DataCriacao);
+
+            return query.ToList();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Controllers.Base;
 using TvCorporativa.Models;
@@ -17,7 +18,7 @@ namespace TvCorporativa.Controllers
 
         public ActionResult Index()
         {
-            return View(_playListDao.GetAll(UsuarioLogado.Empresa));
+            return View(_playListDao.GetAll(UsuarioLogado.Empresa, true));
         }
 
         public ActionResult Create()
@@ -27,11 +28,15 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Nome,Status,DataCriacao,DataInicio,DataFim")] PlayList playlist)
+        public ActionResult Create([Bind(Include="Nome,Status,DataInicio,HoraInicio,DataFim,HoraFim")] PlayList playlist)
         {
             if (ModelState.IsValid)
             {
                 playlist.IdEmpresa = UsuarioLogado.Empresa.Id;
+                playlist.DataCriacao = DateTime.Now;
+                playlist.DataInicio = playlist.DataInicio.Add(playlist.HoraInicio);
+                playlist.DataFim = playlist.DataFim.Add(playlist.HoraFim);
+
                 _playListDao.Save(playlist);
                 return RedirectToAction("Index");
             }
@@ -55,10 +60,12 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,IdEmpresa,Nome,Status,DataCriacao,DataInicio,DataFim")] PlayList playlist)
+        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Nome,Status,DataCriacao,DataInicio,HoraInicio,DataFim,HoraFim")] PlayList playlist)
         {
             if (ModelState.IsValid)
             {
+                playlist.DataInicio = playlist.DataInicio.Add(playlist.HoraInicio);
+                playlist.DataFim = playlist.DataFim.Add(playlist.HoraFim);
                 _playListDao.Save(playlist);
                 
                 return RedirectToAction("Index");

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TvCorporativa.Models.PlayList>
+﻿@using System.Web.Mvc.Html
+@model IEnumerable<TvCorporativa.Models.PlayList>
 
 @{
     ViewBag.Title = "PlayLists";
@@ -34,7 +35,7 @@
                               {
                                   <tr>
                                       <td>
-                                          @Html.CheckBox("Status", item.Status)
+                                          @Html.Label(item.Status ? "Ativa" : "Inativa", new { @class = item.Status ? "label label-success" : "label label-danger" })
                                       </td>
                                       <td>
                                           @Html.DisplayFor(modelItem => item.Nome)
@@ -49,8 +50,8 @@
                                           @Html.DisplayFor(modelItem => item.DataFim)
                                       </td>
                                       <td>
-                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');" })
+                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" }) |
+                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');", @class = "btn btn-xs btn-danger" })
                                       </td>
                                   </tr>
                               }
