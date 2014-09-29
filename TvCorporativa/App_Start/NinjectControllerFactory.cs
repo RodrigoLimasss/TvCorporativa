@@ -8,28 +8,28 @@ namespace TvCorporativa
 {
     public class NinjectControllerFactory : DefaultControllerFactory
     {
-        private readonly IKernel _kernel;
+        public static IKernel Kernel;
 
         public NinjectControllerFactory(IKernel kernel)
         {
-            _kernel = kernel;
+            Kernel = kernel;
             AddBindings();
         }
 
         private void AddBindings()
         {
-            _kernel.Bind<EmpresaDao>().ToSelf();
-            _kernel.Bind<FeedDao>().ToSelf();
-            _kernel.Bind<MidiaDao>().ToSelf();
-            _kernel.Bind<PlayListDao>().ToSelf();
-            _kernel.Bind<PontoDao>().ToSelf();
-            _kernel.Bind<TemplateDao>().ToSelf();
-            _kernel.Bind<UsuarioDao>().ToSelf();
+            Kernel.Bind<EmpresaDao>().ToSelf();
+            Kernel.Bind<FeedDao>().ToSelf();
+            Kernel.Bind<MidiaDao>().ToSelf();
+            Kernel.Bind<PlayListDao>().ToSelf();
+            Kernel.Bind<PontoDao>().ToSelf();
+            Kernel.Bind<TemplateDao>().ToSelf();
+            Kernel.Bind<UsuarioDao>().ToSelf();
         }
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            return controllerType == null ? null : (IController)_kernel.Get(controllerType);
+            return controllerType == null ? null : (IController)Kernel.Get(controllerType);
         }
     }
     

@@ -151,6 +151,7 @@
     <Compile Include="Controllers\PontoController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="DAL\GetServiceHelper.cs" />
     <Compile Include="DAL\TvContext.cs" />
     <Compile Include="DAO\BaseDao.cs" />
     <Compile Include="DAO\PontoDao.cs" />
