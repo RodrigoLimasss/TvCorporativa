@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
 
@@ -12,7 +13,9 @@ namespace TvCorporativa.DAO
 
         public override IList<Ponto> GetAll(Empresa empresa)
         {
-            throw new System.NotImplementedException();
+            return (from p in Context.Pontos
+                where p.Empresa.Id.Equals(empresa.Id)
+                select p).ToList();
         }
     }
 }
