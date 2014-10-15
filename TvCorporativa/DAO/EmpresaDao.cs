@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
 
@@ -14,6 +15,16 @@ namespace TvCorporativa.DAO
         public override IList<Empresa> GetAll(Empresa empresa)
         {
             throw new System.NotImplementedException();
+        }
+        public IList<Empresa> GetAll(bool orderByDesc)
+        {
+            var query = (from p in Context.Empresas
+                         select p);
+
+            if (orderByDesc)
+                query = query.OrderByDescending(p => p.DataCriacao);
+
+            return query.ToList();
         }
     }
 }

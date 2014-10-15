@@ -1,6 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Net;
+using System.Web.Mvc;
 using TvCorporativa.Controllers.Base;
 using TvCorporativa.DAO;
+using TvCorporativa.Models;
 
 namespace TvCorporativa.Controllers
 {
@@ -13,127 +16,83 @@ namespace TvCorporativa.Controllers
             _empresaDao = empresaDao;
         }
 
-        //
-        // GET: /Empresa/
-
+        
         public ActionResult Index()
         {
             if (!UsuarioLogado.Administrador)
                 return RedirectToAction("Index", "Home");
 
-            var empresas = _empresaDao.GetAll();
+            var empresas = _empresaDao.GetAll(true);
    
             return View(empresas);
         }
 
-        //
-        // GET: /Empresa/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Empresa/Create
 
         public ActionResult Create()
         {
-            //var empresas = new List<Empresa>
-            //{
-            //    new Empresa
-            //    {
-            //        Id = 1,
-            //        Nome = "C-se",
-            //        Cnpj = "123.456.789-0001",
-            //        DataCriacao = new DateTime(2014, 09, 06),
-            //        Endereco = "Av. Rio Branco 100 - Centro",
-            //        Status = true,
-            //        Telefone = "2222-2222"
-            //    },
-            //    new Empresa
-            //    {
-            //        Id = 2,
-            //        Nome = "RiWeb",
-            //        Cnpj = "123.456.789-0001",
-            //        DataCriacao = new DateTime(2013, 09, 06),
-            //        Endereco = "Av. Berrini 100 - Brooklin Novo",
-            //        Status = true,
-            //        Telefone = "1111-2222"
-            //    }
-            //};
-
             return View();
         }
 
-        //
-        // POST: /Empresa/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Nome,Status,Endereco,Telefone,Cnpj")] Empresa empresa)
+        {
+            if (ModelState.IsValid)
+            {
+                empresa.DataCriacao = DateTime.Now;
+                empresa.Telefone = empresa.Telefone.Replace(" ", "").Replace("-", "");
+                empresa.Cnpj = empresa.Cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
+                _empresaDao.Save(empresa);
+                return RedirectToAction("Index");
+            }
+
+            return View(empresa);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Empresa empresa = _empresaDao.Get((int)id);
+            if (empresa == null)
+            {
+                return HttpNotFound();
+            }
+            return View(empresa);
+        }
+
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Nome,DataCriacao,Status,Endereco,Telefone,Cnpj")] Empresa empresa)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                empresa.Telefone = empresa.Telefone.Replace(" ", "").Replace("-", "");
+                empresa.Cnpj = empresa.Cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
+                _empresaDao.Save(empresa);
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(empresa);
         }
 
-        //
-        // GET: /Empresa/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
-        }
-
-        //
-        // POST: /Empresa/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            if (id == null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch
+            Empresa empresa = _empresaDao.Get((int)id);
+            if (empresa == null)
             {
-                return View();
+                return HttpNotFound();
             }
-        }
-
-        //
-        // GET: /Empresa/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Empresa/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _empresaDao.Delete(empresa);
+            return RedirectToAction("Index");
         }
     }
 }
