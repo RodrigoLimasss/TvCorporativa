@@ -1,6 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Controllers.Base;
+using TvCorporativa.DAL;
 using TvCorporativa.Models;
 using TvCorporativa.DAO;
 
@@ -15,7 +18,6 @@ namespace TvCorporativa.Controllers
             _usuarioDao = usuarioDao;
         }
 
-        // GET: /Usuario/
         public ActionResult Index()
         {
             if (!UsuarioLogado.Administrador)
@@ -24,36 +26,20 @@ namespace TvCorporativa.Controllers
             return View(_usuarioDao.GetAll());
         }
 
-        // GET: /Usuario/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = _usuarioDao.Get((int)id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        // GET: /Usuario/Create
         public ActionResult Create()
         {
+            MontaDropDownEmpresas();
             return View();
         }
 
-        // POST: /Usuario/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Nome,Senha,Status,Administrador,DataCadastro,Email,Sexo,Telefone")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "Id,IdEmpresa,Nome,Senha,Status,Administrador,Email,Sexo,Telefone")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
+                usuario.Telefone = usuario.Telefone.Replace(" ", "").Replace("-", "");
+                usuario.DataCadastro = DateTime.Now;
                 _usuarioDao.Save(usuario);
                 return RedirectToAction("Index");
             }
@@ -61,7 +47,6 @@ namespace TvCorporativa.Controllers
             return View(usuario);
         }
 
-        // GET: /Usuario/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,26 +58,23 @@ namespace TvCorporativa.Controllers
             {
                 return HttpNotFound();
             }
+            MontaDropDownEmpresas();
             return View(usuario);
         }
 
-        // POST: /Usuario/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Nome,Senha,Status,Administrador,DataCadastro,Email,Sexo,Telefone")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Nome,Senha,Status,Administrador,DataCadastro,Email,Sexo,Telefone")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                //db.Entry(usuario).State = EntityState.Modified;
-                //db.SaveChanges();
+                usuario.Telefone = usuario.Telefone.Replace(" ", "").Replace("-", "");
+                _usuarioDao.Save(usuario);
                 return RedirectToAction("Index");
             }
             return View(usuario);
         }
 
-        // GET: /Usuario/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,18 +86,18 @@ namespace TvCorporativa.Controllers
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            _usuarioDao.Delete(usuario);
+
+            return RedirectToAction("Index");
         }
 
-        // POST: /Usuario/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        private void MontaDropDownEmpresas()
         {
-            Usuario usuario = _usuarioDao.Get(id);
-            _usuarioDao.Delete(usuario);
-           
-            return RedirectToAction("Index");
+            var dropDownDataList = GetServiceHelper.GetService<EmpresaDao>().GetAll();
+
+            var dropDownOptions = dropDownDataList.Select(t => new SelectListItem { Text = t.Nome, Value = t.Id.ToString() });
+
+            ViewBag.DropDownEmpresas = dropDownOptions;
         }
     }
 }

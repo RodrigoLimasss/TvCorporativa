@@ -7,7 +7,7 @@
 <h2>Usuários</h2>
 
 <p>
-    @Html.ActionLink("Criar Usuário", "Create")
+    @Html.ActionLink("Criar Usuário", "Create", null, new { @class = "btn btn-default" })
 </p>
                       <div class="table-responsive">
                           <table class="table">
@@ -46,7 +46,7 @@
                               {
                                   <tr>
                                       <td>
-                                          @Html.CheckBox("Status", item.Status)
+                                          @Html.Label(item.Status ? "Ativo" : "Inativo", new { @class = item.Status ? "label label-success" : "label label-danger" })
                                       </td>
                                       <td>
                                           @Html.DisplayFor(modelItem => item.Nome)
@@ -73,8 +73,8 @@
                                           @Html.Label(item.Administrador ? "Sim" : "Não")
                                       </td>
                                       <td>
-                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" }) |
+                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');", @class = "btn btn-xs btn-danger" })
                                       </td>
                                   </tr>
                               }
