@@ -47,6 +47,10 @@ textarea {
     width: 50px;
 }
 
+.height25 {
+    height: 25px;
+}
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {

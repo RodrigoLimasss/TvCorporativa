@@ -1,6 +1,9 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Controllers.Base;
+using TvCorporativa.DAL;
 using TvCorporativa.DAO;
 using TvCorporativa.Models;
 
@@ -15,43 +18,26 @@ namespace TvCorporativa.Controllers
             _pontoDao = pontoDao;
         }
 
-        // GET: /Ponto/
         public ActionResult Index()
         {
             if (!UsuarioLogado.Administrador)
                 return RedirectToAction("Index", "Home");
 
             var pontos = _pontoDao.GetAll();
+
             return View(pontos);
         }
 
-        // GET: /Ponto/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ponto ponto = _pontoDao.Get((int) id);
-            if (ponto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ponto);
-        }
-
-        // GET: /Ponto/Create
         public ActionResult Create()
         {
+            MontaDropDownTemplates();
+            MontaDropDownEmpresas();
             return View();
         }
 
-        // POST: /Ponto/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Nome,Status")] Ponto ponto)
+        public ActionResult Create([Bind(Include = "Id,IdTemplate,IdEmpresa,Nome,Status")] Ponto ponto)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +49,6 @@ namespace TvCorporativa.Controllers
             return View(ponto);
         }
 
-        // GET: /Ponto/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -75,27 +60,24 @@ namespace TvCorporativa.Controllers
             {
                 return HttpNotFound();
             }
+            MontaDropDownTemplates();
+            MontaDropDownEmpresas();
             return View(ponto);
         }
 
-        // POST: /Ponto/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Nome,Status")] Ponto ponto)
+        public ActionResult Edit([Bind(Include = "Id,IdTemplate,IdEmpresa,Nome,Status")] Ponto ponto)
         {
             if (ModelState.IsValid)
             {
-                //db.Entry(ponto).State = EntityState.Modified;
-                //db.SaveChanges();
+                _pontoDao.Save(ponto);
                 return RedirectToAction("Index");
             }
             return View(ponto);
         }
 
-        // GET: /Ponto/Delete/5
-        public ActionResult Delete(long? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -106,18 +88,26 @@ namespace TvCorporativa.Controllers
             {
                 return HttpNotFound();
             }
-            return View(ponto);
+            _pontoDao.Delete(ponto);
+            return RedirectToAction("Index");
         }
 
-        // POST: /Ponto/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        private void MontaDropDownTemplates()
         {
-            //Ponto ponto = db.Pontos.Find(id);
-            //db.Pontos.Remove(ponto);
-            //db.SaveChanges();
-            return RedirectToAction("Index");
+            var dropDownDataList = GetServiceHelper.GetService<TemplateDao>().GetAll();
+
+            var dropDownOptions = dropDownDataList.Select(t => new SelectListItem { Text = t.Nome, Value = t.Id.ToString() });
+
+            ViewBag.DropDownTemplates = dropDownOptions;
+        }
+
+        private void MontaDropDownEmpresas()
+        {
+            var dropDownDataList = GetServiceHelper.GetService<EmpresaDao>().GetAll();
+
+            var dropDownOptions = dropDownDataList.Select(t => new SelectListItem { Text = t.Nome, Value = t.Id.ToString() });
+
+            ViewBag.DropDownEmpresas = dropDownOptions;
         }
     }
 }

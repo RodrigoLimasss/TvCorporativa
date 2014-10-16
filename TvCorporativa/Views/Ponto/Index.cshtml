@@ -8,7 +8,7 @@
 <h2>Pontos</h2>
 
 <p>
-    @Html.ActionLink("Criar Ponto", "Create")
+    @Html.ActionLink("Criar Ponto", "Create", null, new { @class = "btn btn-default" })
 </p>
                       <div class="table-responsive">
                           <table class="table">
@@ -20,6 +20,9 @@
                                       @Html.DisplayNameFor(model => model.Nome)
                                   </th>
                                   <th>
+                                      @Html.DisplayNameFor(model => model.Template)
+                                  </th>
+                                  <th>
                                       @Html.DisplayNameFor(model => model.Empresa)
                                   </th>
                                   <th></th>
@@ -29,17 +32,20 @@
                               {
                                   <tr>
                                       <td>
-                                          @Html.CheckBox("Status", item.Status)
+                                          @Html.Label(item.Status ? "Ativa" : "Inativa", new { @class = item.Status ? "label label-success" : "label label-danger" })
                                       </td>
                                       <td>
                                           @Html.DisplayFor(modelItem => item.Nome)
                                       </td>
                                       <td>
+                                          @Html.DisplayFor(modelItem => item.Template.Nome)
+                                      </td>
+                                      <td>
                                           @Html.DisplayFor(modelItem => item.Empresa.Nome)
                                       </td>
                                       <td>
-                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" }) |
+                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');", @class = "btn btn-xs btn-danger" })
                                       </td>
                                   </tr>
                               }

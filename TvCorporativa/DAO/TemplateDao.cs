@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
 
@@ -14,5 +15,6 @@ namespace TvCorporativa.DAO
         {
             throw new System.NotImplementedException();
         }
+
     }
 }

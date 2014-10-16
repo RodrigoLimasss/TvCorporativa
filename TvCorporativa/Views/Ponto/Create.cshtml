@@ -1,4 +1,6 @@
-﻿@model TvCorporativa.Models.Ponto
+﻿@using TvCorporativa.DAL
+@using TvCorporativa.DAO
+@model TvCorporativa.Models.Ponto
 
 @{
     ViewBag.Title = "Criar Ponto";
@@ -27,6 +29,22 @@
             @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nome)
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Template, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdTemplate, (IEnumerable<SelectListItem>)ViewBag.DropDownTemplates, "-- Selecione o Template --", new { @class = "height25" })
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Empresa, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdEmpresa, (IEnumerable<SelectListItem>)ViewBag.DropDownEmpresas, "-- Selecione a Empresa --", new { @class = "height25" })
                 @Html.ValidationMessageFor(model => model.Nome)
             </div>
         </div>
