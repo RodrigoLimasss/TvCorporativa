@@ -7,7 +7,7 @@
 <h2>Templates</h2>
 
 <p>
-    @Html.ActionLink("Criar Template", "Create")
+    @Html.ActionLink("Criar Template", "Create", null, new { @class = "btn btn-default" })
 </p>
                       <div class="table-responsive">
                           <table class="table">
@@ -25,8 +25,8 @@
                                           @Html.DisplayFor(modelItem => item.Nome)
                                       </td>
                                       <td>
-                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" }) |
+                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');", @class = "btn btn-xs btn-danger" })
                                       </td>
                                   </tr>
                               }
