@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Player";
+    Layout = null;
+}
+
+<h2>Player</h2>
+
+<div id="playList"></div>
+
+@InputExtensions.Hidden(Html, "IdPonto", ViewBag.HiddenIdPonto)
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.11.1.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/js/webApi.js")"></script>

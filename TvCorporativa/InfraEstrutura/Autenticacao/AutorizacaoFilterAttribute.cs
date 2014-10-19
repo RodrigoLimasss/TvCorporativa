@@ -8,7 +8,7 @@ namespace TvCorporativa.InfraEstrutura.Autenticacao
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (filterContext.RouteData.Values.ContainsValue("Login"))
+            if (filterContext.RouteData.Values.ContainsValue("Login") || filterContext.RouteData.Values.ContainsValue("Player"))
                 return;
 
             var sessaoUsuario = HttpContext.Current.Session["UsuarioLogado"];

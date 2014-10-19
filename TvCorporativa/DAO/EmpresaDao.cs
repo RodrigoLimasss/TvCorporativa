@@ -26,5 +26,12 @@ namespace TvCorporativa.DAO
 
             return query.ToList();
         }
+
+        public Empresa GetPorNomeAmigavel(string nome)
+        {
+            return (from p in Context.Empresas
+                where p.Nome.Equals(nome)
+                select p).FirstOrDefault();
+        }
     }
 }

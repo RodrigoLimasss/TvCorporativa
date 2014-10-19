@@ -29,5 +29,12 @@ namespace TvCorporativa.DAO
 
             return query.ToList();
         }
+
+        public IList<PlayList> GetPorPonto(int idPonto)
+        {
+            return (from p in Context.PlayList
+                    where p.Pontos.Any(x => x.Id == idPonto)
+                select p).ToList();
+        }
     }
 }

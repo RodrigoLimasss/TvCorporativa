@@ -33,5 +33,7 @@ namespace TvCorporativa.Models
         public virtual Empresa Empresa { get; set; }
 
         public virtual ICollection<Midia> Midias { get; set; }
+
+        public virtual ICollection<Ponto> Pontos { get; set; }
     }
 }

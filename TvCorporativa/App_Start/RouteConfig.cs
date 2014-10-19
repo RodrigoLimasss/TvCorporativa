@@ -14,6 +14,12 @@ namespace TvCorporativa
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Player",
+                url: "{controller}/{action}/{empresa}/{idPonto}",
+                defaults: new { controller = "Player", action = "Execute", empresa = "", idPonto = "" }
+            );
         }
     }
 }
