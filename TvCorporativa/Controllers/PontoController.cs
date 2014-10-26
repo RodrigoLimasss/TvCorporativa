@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Controllers.Base;
@@ -89,6 +90,16 @@ namespace TvCorporativa.Controllers
             }
             _pontoDao.Delete(ponto);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Visualizar(int? idPonto, int? idEmpresa)
+        {
+            if (idPonto == null || idEmpresa == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var empresa = GetServiceHelper.GetService<EmpresaDao>().Get((int) idEmpresa);
+
+            return Redirect(string.Format("~/Player/Execute/{0}/{1}", empresa.Nome, idPonto));
         }
 
         private void MontaDropDownTemplates()

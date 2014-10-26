@@ -44,6 +44,7 @@
                                           @Html.DisplayFor(modelItem => item.Empresa.Nome)
                                       </td>
                                       <td>
+                                          @Html.ActionLink("Visualizar", "Visualizar", new { idPonto = item.Id, idEmpresa = item.IdEmpresa }, new { @target = "_blanck", @class = "btn btn-xs btn-warning" }) | 
                                           @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" }) |
                                           @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');", @class = "btn btn-xs btn-danger" })
                                       </td>
