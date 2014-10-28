@@ -4,7 +4,9 @@
 header, footer, nav, section {
     display: block;
 }
-
+hr {
+    width: 100%;
+}
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
@@ -82,3 +84,24 @@ textarea {
 .navbar-inverse .navbar-nav > li > a:hover {
     color: #777;
 }
+
+/* Fim bootstrap overwrite */
+
+.connectedSortable {
+    border: 1px solid #eee;
+    width: 100%;
+    height: 200px;
+    min-height: 150px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+    overflow: auto;
+  }
+  .connectedSortable li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 14px;
+    width: 98%;
+  }

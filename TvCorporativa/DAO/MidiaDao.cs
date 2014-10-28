@@ -17,5 +17,16 @@ namespace TvCorporativa.DAO
                     where p.IdEmpresa.Equals(empresa.Id)
                     select p).ToList();
         }
+
+        public IList<Midia> GetAllNotInPlayList(Empresa empresa, ICollection<Midia> midias)
+        {
+            string query = " SELECT DISTINCT M.Id_Midia AS Id, M.Nome, m.Extensao, M.Tamanho, M.Id_Empresa as IdEmpresa " +
+                           " FROM MIDIA M " +
+                           " LEFT JOIN PLAYLIST_MIDIA PM ON PM.Id_Midia = M.Id_Midia " +
+                           " WHERE M.Id_Empresa = " + empresa.Id +
+                           " AND M.Id_Midia NOT IN (" + midias.Select(p => p.Id.ToString()).Aggregate((a, b) => a + ", " + b) + ") ";
+
+            return Context.Midias.SqlQuery(query).ToList();
+        }
     }
 }

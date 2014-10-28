@@ -1,8 +1,15 @@
-﻿@model TvCorporativa.Models.PlayList
+﻿@using TvCorporativa.DAL
+@using TvCorporativa.DAO
+@using TvCorporativa.Models
+@model TvCorporativa.Models.PlayList
 
 @{
     ViewBag.Title = "Editar PlayList";
+    var usuarioLogado = ((TvCorporativa.Models.Usuario)Session["UsuarioLogado"]);
 }
+
+
+<link rel="stylesheet" href="../../Content/css/jquery-ui.css">
 
 <h2>Editar PlayList</h2>
 
@@ -58,15 +65,119 @@
                 @Html.DisplayFor(model => model.DataCriacao, new { @class = "col-md-2" })
             </div>
         </div>
+        
+        <hr/>
+        
+        <h4>Selecionar Mídias</h4>
+        <br/>
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Disponíveis</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="sortable1" class="connectedSortable">
+                        
+                        @{
+                            var midias = GetServiceHelper.GetService<MidiaDao>().GetAllNotInPlayList(usuarioLogado.Empresa, Model.Midias);
+
+                            foreach (var midia in midias)
+                            {
+                                <li class="ui-state-default">@Html.Label(midia.Nome).@Html.Label(midia.Extensao + " - " + midia.Tamanho)</li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Selecionadas</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="sortable2" class="connectedSortable">
+                        
+                        @{
+                            foreach (var midia in Model.Midias)
+                            {
+                                <li class="ui-state-default">@Html.Label(midia.Nome).@Html.Label(midia.Extensao + " - " + midia.Tamanho)</li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+
+        <h4>Selecionar Pontos</h4>
+        <br />
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Disponíveis</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="sortable1" class="connectedSortable">
+
+                        @{
+                            var pontos = GetServiceHelper.GetService<PontoDao>().GetAllNotInPlayList(usuarioLogado.Empresa, Model.Pontos);
+
+                            foreach (var ponto in pontos)
+                            {
+                                <li class="ui-state-default">@Html.Label(ponto.Status ? "Ativo" : "Inativo") - @Html.Label(ponto.Nome)</li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Selecionados</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="sortable2" class="connectedSortable">
+                        
+                        @{
+                            foreach (var ponto in Model.Pontos)
+                            {
+                                <li class="ui-state-default">@Html.Label(ponto.Status ? "Ativo" : "Inativo") - @Html.Label(ponto.Nome)</li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Salvar" class="btn btn-default" />
             </div>
         </div>
-    </div>
+        </div>
 }
 
 <div>
     @Html.ActionLink("Voltar para lista", "Index")
 </div>
+
+@section Scripts
+{
+    <script src="../../Scripts/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#sortable1, #sortable2").sortable({
+                connectWith: ".connectedSortable"
+            }).disableSelection();
+        });
+    </script>
+}

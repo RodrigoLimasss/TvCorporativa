@@ -30,7 +30,13 @@ namespace TvCorporativa.DAL
                                                                                                        c.MapLeftKey("Id_PlayList");
                                                                                                        c.MapRightKey("Id_Ponto");
                                                                                                        c.ToTable("PONTO_PLAYLIST");
-                                                                                                       });   
+                                                                                                       });
+            modelBuilder.Entity<PlayList>().HasMany(x => x.Midias).WithMany(x => x.PlayLists).Map(c =>
+            {
+                c.MapLeftKey("Id_PlayList");
+                c.MapRightKey("Id_Midia");
+                c.ToTable("PLAYLIST_MIDIA");
+            });
             modelBuilder.Entity<Usuario>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
             modelBuilder.Entity<Feed>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
             modelBuilder.Entity<Midia>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
