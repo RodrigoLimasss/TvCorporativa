@@ -7,6 +7,7 @@ namespace TvCorporativa.Models
     {
         [Column("Id_Midia")]
         public int Id { get; set; }
+        public bool Status { get; set; }
         public string Nome { get; set; }
         public string Extensao { get; set; }
         public double Tamanho { get; set; }

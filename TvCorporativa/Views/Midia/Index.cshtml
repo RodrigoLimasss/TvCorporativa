@@ -13,6 +13,9 @@
                           <table class="table">
                               <tr>
                                   <th>
+                                      @Html.DisplayNameFor(model => model.Status)
+                                  </th>
+                                  <th>
                                       @Html.DisplayNameFor(model => model.Nome)
                                   </th>
                                   <th>
@@ -27,6 +30,9 @@
                               @foreach (var item in Model)
                               {
                                   <tr>
+                                      <td>
+                                          @Html.Label(item.Status ? "Ativo" : "Inativo", new { @class = item.Status ? "label label-success" : "label label-danger" })
+                                      </td>
                                       <td>
                                           @Html.DisplayFor(modelItem => item.Nome)
                                       </td>

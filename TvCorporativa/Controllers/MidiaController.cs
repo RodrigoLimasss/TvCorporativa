@@ -17,7 +17,7 @@ namespace TvCorporativa.Controllers
 
         public ActionResult Index()
         {
-            return View(_midiaDao.GetAll(UsuarioLogado.Empresa));
+            return View(_midiaDao.GetAll(UsuarioLogado.Empresa, true));
         }
 
         public ActionResult Create()
