@@ -170,6 +170,7 @@
     <Compile Include="InfraEstrutura\Autenticacao\AutorizacaoFilterAttribute.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Feed.cs" />
+    <Compile Include="Models\FeedPonto.cs" />
     <Compile Include="Models\Midia.cs" />
     <Compile Include="Models\PlayList.cs" />
     <Compile Include="Models\PlayListsMidias.cs" />
@@ -199,6 +200,7 @@
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.mask.min.js" />
+    <Content Include="Scripts\js\Feed.js" />
     <Content Include="Scripts\js\PlayList.js" />
     <Content Include="Scripts\js\Util.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />

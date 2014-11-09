@@ -1,8 +1,14 @@
-﻿@model TvCorporativa.Models.Feed
+﻿@using TvCorporativa.DAL
+@using TvCorporativa.DAO
+@model TvCorporativa.Models.Feed
 
 @{
     ViewBag.Title = "Editar Feed";
+    var usuarioLogado = ((TvCorporativa.Models.Usuario)Session["UsuarioLogado"]);
 }
+
+
+<link rel="stylesheet" href="../../Content/css/jquery-ui.css">
 
 <h2>Editar Feed</h2>
 
@@ -10,12 +16,21 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.Hidden("idsPontos")
     
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.IdEmpresa)
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
@@ -28,14 +43,64 @@
         <div class="form-group">
             @Html.Label("Endereço", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Endereco)
+                @Html.TextBoxFor(model => model.Endereco, new { @class = "width300" })
                 @Html.ValidationMessageFor(model => model.Endereco)
             </div>
         </div>
+        
+        <hr />
+
+        <h4>Selecionar Pontos</h4>
+        <br />
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Disponíveis</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="pontosDisponiveis" class="connectedSortable">
+                        @{
+                            var pontos = GetServiceHelper.GetService<PontoDao>().GetAllNotInFeed(usuarioLogado.Empresa, Model.FeedsPontos);
+
+                            foreach (var ponto in pontos)
+                            {
+                                <li class="ui-state-default" data-id="@Html.DisplayName(ponto.Id.ToString())">
+                                    @Html.Label(ponto.Nome)
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Selecionados</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="pontosSelecionados" class="connectedSortable">
+                        @{
+                            foreach (var ponto in Model.FeedsPontos)
+                            {
+                                <li class="ui-state-default" data-id="@Html.DisplayName(ponto.IdPonto.ToString())">
+                                    @Html.Label(ponto.Ponto.Nome)
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-default" onclick="getPontos()" />
             </div>
         </div>
     </div>
@@ -44,3 +109,8 @@
 <div>
     @Html.ActionLink("Voltar para lista", "Index")
 </div>
+
+@section Scripts
+{
+    <script src="../../Scripts/js/Feed.js"></script>
+}

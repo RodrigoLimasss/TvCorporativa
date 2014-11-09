@@ -50,6 +50,20 @@ namespace TvCorporativa.DAO
             return Context.Pontos.SqlQuery(query).ToList();
         }
 
+        public IList<Ponto> GetAllNotInFeed(Empresa empresa, ICollection<FeedPonto> feedsPontos)
+        {
+            string query = " SELECT DISTINCT p.Id_Ponto as Id, p.Id_Empresa as IdEmpresa, p.Id_Template as IdTemplate, p.Nome, p.Status " +
+                           " FROM ponto_tv p " +
+                           " LEFT JOIN FEED_PONTO fp on fp.Id_Ponto = p.Id_Ponto " +
+                           " WHERE p.Id_Empresa = " + empresa.Id +
+                           " AND p.Status = 1 ";
+            query += feedsPontos.Any()
+                ? " AND p.Id_Ponto NOT IN (" + feedsPontos.Select(p => p.IdPonto.ToString()).Aggregate((a, b) => a + ", " + b) + ") "
+                : "";
+
+            return Context.Pontos.SqlQuery(query).ToList();
+        }
+
     }
 
     public struct FiltroPonto

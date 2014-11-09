@@ -7,12 +7,15 @@
 <h2>Feeds</h2>
 
 <p>
-    @Html.ActionLink("Novo Feed", "Create", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Criar Feed", "Create", null, new { @class = "btn btn-default" })
 </p>
     
                       <div class="table-responsive">
                           <table class="table">
                               <tr>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Status)
+                                  </th>
                                   <th>
                                       @Html.DisplayNameFor(model => model.Nome)
                                   </th>
@@ -25,6 +28,9 @@
                               @foreach (var item in Model)
                               {
                                   <tr>
+                                      <td>
+                                          @Html.Label(item.Status ? "Ativo" : "Inativo", new { @class = item.Status ? "label label-success" : "label label-danger" })
+                                      </td>
                                       <td>
                                           @Html.DisplayFor(modelItem => item.Nome)
                                       </td>

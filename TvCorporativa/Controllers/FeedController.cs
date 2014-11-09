@@ -1,5 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using TvCorporativa.Controllers.Base;
 using TvCorporativa.Models;
 using TvCorporativa.DAO;
@@ -17,7 +21,7 @@ namespace TvCorporativa.Controllers
 
         public ActionResult Index()
         {
-            return View(_feedDao.GetAll(UsuarioLogado.Empresa));
+            return View(_feedDao.GetAll(UsuarioLogado.Empresa, true));
         }
 
 
@@ -28,12 +32,20 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Nome,Endereco")] Feed feed)
+        public ActionResult Create([Bind(Include = "Id,Status,Nome,Endereco")] Feed feed, string idsPontos)
         {
             if (ModelState.IsValid)
             {
+                var anonObject = new[] { new { id = 0, ordem = 0 } };
+                var dPontos = JsonConvert.DeserializeAnonymousType(idsPontos, anonObject);
+
+                var newPontos = dPontos.Select(x => new KeyValuePair<int, int>(Convert.ToInt32(x.id), x.ordem)).ToList();
+                
+                _feedDao.AddPontos(feed, newPontos);
                 feed.IdEmpresa = UsuarioLogado.Empresa.Id;
+
                 _feedDao.Save(feed);
+
                 return RedirectToAction("Index");
             }
 
@@ -56,14 +68,27 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Nome,Endereco")] Feed feed)
+        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Status,Nome,Endereco")] Feed feed, string idsPontos)
         {
+            var feedEdit = _feedDao.Get(feed.Id);
+
             if (ModelState.IsValid)
             {
-                _feedDao.Save(feed);
+                var anonObject = new[] { new { id = 0, ordem = 0 } };
+                var dPontos = JsonConvert.DeserializeAnonymousType(idsPontos, anonObject);
+
+                var newPontos = dPontos.Select(x => new KeyValuePair<int, int>(Convert.ToInt32(x.id), x.ordem)).ToList();
+
+                feedEdit.Status = feed.Status;
+                feedEdit.Nome = feed.Nome;
+                feedEdit.Endereco = feed.Endereco;
+                feedEdit.IdEmpresa = UsuarioLogado.Empresa.Id;
+                _feedDao.AddPontos(feedEdit, newPontos);
+
+                _feedDao.Save(feedEdit);
                 return RedirectToAction("Index");
             }
-            return View(feed);
+            return View(feedEdit);
         }
 
         public ActionResult Delete(int? id)
