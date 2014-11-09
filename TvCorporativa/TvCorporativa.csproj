@@ -172,6 +172,8 @@
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\Midia.cs" />
     <Compile Include="Models\PlayList.cs" />
+    <Compile Include="Models\PlayListsMidias.cs" />
+    <Compile Include="Models\PlayListsPontos.cs" />
     <Compile Include="Models\Ponto.cs" />
     <Compile Include="Models\Template.cs" />
     <Compile Include="Models\Usuario.cs" />

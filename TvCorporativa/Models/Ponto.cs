@@ -20,7 +20,6 @@ namespace TvCorporativa.Models
         public int IdTemplate { get; set; }
         public virtual Template Template { get; private set; }
         public virtual ICollection<Feed> Feeds { get; set; }
-
-        public virtual ICollection<PlayList> PlayLists { get; set; }
+        public virtual ICollection<PlayListsPontos> PlayListsPontos { get; set; }
     }
 }

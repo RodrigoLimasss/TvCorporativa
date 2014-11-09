@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace TvCorporativa.Models
 {
@@ -32,8 +33,36 @@ namespace TvCorporativa.Models
 
         public virtual Empresa Empresa { get; set; }
 
-        public virtual ICollection<Midia> Midias { get; set; }
+        public virtual ICollection<PlayListsMidias> PlayListsMidias { get; set; }
 
-        public virtual ICollection<Ponto> Pontos { get; set; }
+        public virtual ICollection<PlayListsPontos> PlayListsPontos { get; set; }
+
+        public void AddPontos(IEnumerable<PlayListsPontos> playListsPontos)
+        {
+            foreach (var playListPonto in playListsPontos)
+            {
+                if (!PlayListsPontos.Select(x => x.IdPonto).Contains(playListPonto.Ponto.Id))
+                    PlayListsPontos.Add(playListPonto);
+            }
+        }
+
+        public void AddMidias(IEnumerable<PlayListsMidias> playListsMidias)
+        {
+            foreach (var playListMidia in playListsMidias)
+            {
+                if (!PlayListsMidias.Select(x => x.IdMidia).Contains(playListMidia.Midia.Id))
+                    PlayListsMidias.Add(playListMidia);
+            }
+        }
+
+        public void ClearPontos()
+        {
+            PlayListsPontos.Clear();
+        }
+
+        public void ClearMidias()
+        {
+            PlayListsMidias.Clear();
+        }
     }
 }

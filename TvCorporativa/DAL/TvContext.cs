@@ -9,8 +9,13 @@ namespace TvCorporativa.DAL
         public TvContext()
             : base("name=TvCorporativaConection")
         {
-            
+
         }
+
+        //public void Detach(object entity)
+        //{
+        //    ((IObjectContextAdapter) this).ObjectContext.Detach(entity);
+        //}
 
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Feed> Feeds { get; set; }
@@ -19,31 +24,25 @@ namespace TvCorporativa.DAL
         public DbSet<Ponto> Pontos { get; set; }
         public DbSet<Template> Templates { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<PlayListsPontos> PlayListsPontos { get; set; }
+        public DbSet<PlayListsMidias> PlayListsMidias { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<PlayList>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
-            modelBuilder.Entity<PlayList>().HasMany(x => x.Pontos).WithMany(x => x.PlayLists).Map(c =>
-                                                                                                       {
-                                                                                                       c.MapLeftKey("Id_PlayList");
-                                                                                                       c.MapRightKey("Id_Ponto");
-                                                                                                       c.ToTable("PONTO_PLAYLIST");
-                                                                                                       });
-            modelBuilder.Entity<PlayList>().HasMany(x => x.Midias).WithMany(x => x.PlayLists).Map(c =>
-            {
-                c.MapLeftKey("Id_PlayList");
-                c.MapRightKey("Id_Midia");
-                c.ToTable("PLAYLIST_MIDIA");
-            });
+            modelBuilder.Entity<PlayList>().HasMany(x => x.PlayListsPontos).WithRequired(x => x.PlayList).HasForeignKey(x => x.IdPlayList);
+            modelBuilder.Entity<PlayList>().HasMany(x => x.PlayListsMidias).WithRequired(x => x.PlayList).HasForeignKey(x => x.IdPlayList);
+            modelBuilder.Entity<PlayListsMidias>().HasKey(x => new { x.IdMidia, x.IdPlayList });
+            modelBuilder.Entity<PlayListsPontos>().HasKey(x => new { x.IdPonto, x.IdPlayList });
             modelBuilder.Entity<Usuario>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
             modelBuilder.Entity<Feed>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
             modelBuilder.Entity<Midia>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
             modelBuilder.Entity<Ponto>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
             modelBuilder.Entity<Ponto>().HasRequired(x => x.Template).WithMany().HasForeignKey(x => x.IdTemplate);
-            //modelBuilder.Entity<Ponto>().HasMany(x => x.PlayLists).WithMany(x => x.Pontos);
+            modelBuilder.Entity<Ponto>().HasMany(x => x.PlayListsPontos).WithRequired(x => x.Ponto).HasForeignKey(x => x.IdPonto);
+            modelBuilder.Entity<Midia>().HasMany(x => x.PlayListsMidias).WithRequired(x => x.Midia).HasForeignKey(x => x.IdMidia);
         }
-
     }
 }

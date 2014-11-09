@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
@@ -33,8 +35,19 @@ namespace TvCorporativa.DAO
         public IList<PlayList> GetPorPonto(int idPonto)
         {
             return (from p in Context.PlayList
-                    where p.Pontos.Any(x => x.Id == idPonto)
+                    where p.PlayListsPontos.Any(x => x.IdPonto == idPonto)
                 select p).ToList();
+        }
+
+        public void AddPontosAndMidias(PlayList playList, IList<KeyValuePair<int, int>> pontosOrdem, IList<KeyValuePair<int, int>> midiasOrdem)
+        {
+            var pontos = pontosOrdem.Select(ponto => new PlayListsPontos { Ponto = Context.Pontos.Find(ponto.Key), Ordem = ponto.Value }).ToList();
+            var midias = midiasOrdem.Select(midia => new PlayListsMidias { Midia = Context.Midias.Find(midia.Key), Ordem = midia.Value }).ToList();
+
+            playList.ClearPontos();
+            playList.ClearMidias();
+            playList.AddPontos(pontos);
+            playList.AddMidias(midias);
         }
     }
 }

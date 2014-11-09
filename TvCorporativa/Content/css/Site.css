@@ -98,10 +98,15 @@ textarea {
     float: left;
     margin-right: 10px;
     overflow: auto;
-  }
-  .connectedSortable li {
+    cursor: move;
+}
+.connectedSortable li {
     margin: 0 5px 5px 5px;
     padding: 5px;
     font-size: 14px;
     width: 98%;
-  }
+    cursor: move;
+}
+.connectedSortable label {
+    cursor: move;
+}

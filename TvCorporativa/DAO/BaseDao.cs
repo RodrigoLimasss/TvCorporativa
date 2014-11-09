@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
@@ -10,7 +9,7 @@ namespace TvCorporativa.DAO
 {
     public abstract class BaseDao<T> : IDao<T> where T : class
     {
-        protected readonly TvContext Context;
+        protected TvContext Context;
 
         protected BaseDao(TvContext context)
         {
@@ -61,7 +60,8 @@ namespace TvCorporativa.DAO
 
         public T Get(int id)
         {
-            return Context.Set<T>().Find(id);
+            var entity = Context.Set<T>().Find(id);
+            return entity;
         }
 
         public void Delete(T entity)

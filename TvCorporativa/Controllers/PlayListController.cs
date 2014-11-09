@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using TvCorporativa.Controllers.Base;
 using TvCorporativa.Models;
 using TvCorporativa.DAO;
@@ -60,17 +63,28 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Nome,Status,DataCriacao,DataInicio,HoraInicio,DataFim,HoraFim")] PlayList playlist)
+        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Nome,Status,DataCriacao,DataInicio,HoraInicio,DataFim,HoraFim")] PlayList playlist, string idsPontos, string idsMidias)
         {
+            var playListEdit = _playListDao.Get(playlist.Id);
+
             if (ModelState.IsValid)
             {
-                playlist.DataInicio = playlist.DataInicio.Add(playlist.HoraInicio);
-                playlist.DataFim = playlist.DataFim.Add(playlist.HoraFim);
-                _playListDao.Save(playlist);
+                var anonObject = new[] {new {id = 0, ordem = 0}};
+                var dPontos = JsonConvert.DeserializeAnonymousType(idsPontos, anonObject);
+                var dMidias = JsonConvert.DeserializeAnonymousType(idsMidias, anonObject);
+
+                var newPontos = dPontos.Select(x => new KeyValuePair<int, int>(Convert.ToInt32(x.id), x.ordem)).ToList();
+                var newMidias = dMidias.Select(x => new KeyValuePair<int, int>(Convert.ToInt32(x.id), x.ordem)).ToList();
+
+                playListEdit.DataInicio = playlist.DataInicio.Add(playlist.HoraInicio);
+                playListEdit.DataFim = playlist.DataFim.Add(playlist.HoraFim);
+
+                _playListDao.AddPontosAndMidias(playListEdit, newPontos, newMidias);
+                _playListDao.Save(playListEdit);
                 
                 return RedirectToAction("Index");
             }
-            return View(playlist);
+            return View(playListEdit);
         }
 
         public ActionResult Delete(int? id)
@@ -87,6 +101,5 @@ namespace TvCorporativa.Controllers
             _playListDao.Delete(playlist);
             return RedirectToAction("Index");
         }
-
     }
 }

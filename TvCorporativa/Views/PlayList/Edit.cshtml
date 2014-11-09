@@ -24,6 +24,8 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.IdEmpresa)
         @Html.HiddenFor(model => model.DataCriacao)
+        @Html.Hidden("idsPontos")
+        @Html.Hidden("idsMidias")
         
         <div class="form-group">
             @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
@@ -76,14 +78,15 @@
                     <h3 class="panel-title">Disponíveis</h3>
                 </div>
                 <div class="panel-body">
-                    <ul id="sortable1" class="connectedSortable">
-                        
+                    <ul id="midiasDisponiveis" class="connectedSortable">
                         @{
-                            var midias = GetServiceHelper.GetService<MidiaDao>().GetAllNotInPlayList(usuarioLogado.Empresa, Model.Midias);
+                            var midias = GetServiceHelper.GetService<MidiaDao>().GetAllNotInPlayList(usuarioLogado.Empresa, Model.PlayListsMidias);
 
                             foreach (var midia in midias)
                             {
-                                <li class="ui-state-default">@Html.Label(midia.Nome).@Html.Label(midia.Extensao + " - " + midia.Tamanho)</li>
+                                <li class="ui-state-default" data-id="@Html.DisplayName(midia.Id.ToString())">
+                                    @Html.Label(midia.Nome).@Html.Label(midia.Extensao + " - " + midia.Tamanho)
+                                </li>
                             }
                         }
 
@@ -98,12 +101,13 @@
                     <h3 class="panel-title">Selecionadas</h3>
                 </div>
                 <div class="panel-body">
-                    <ul id="sortable2" class="connectedSortable">
-                        
+                    <ul id="midiasSelecionadas" class="connectedSortable">
                         @{
-                            foreach (var midia in Model.Midias)
+                            foreach (var midia in Model.PlayListsMidias)
                             {
-                                <li class="ui-state-default">@Html.Label(midia.Nome).@Html.Label(midia.Extensao + " - " + midia.Tamanho)</li>
+                                <li class="ui-state-default" data-id="@Html.DisplayName(midia.IdMidia.ToString())">
+                                    @Html.Label(midia.Midia.Nome).@Html.Label(midia.Midia.Extensao + " - " + midia.Midia.Tamanho)
+                                </li>
                             }
                         }
 
@@ -122,14 +126,15 @@
                     <h3 class="panel-title">Disponíveis</h3>
                 </div>
                 <div class="panel-body">
-                    <ul id="sortable1" class="connectedSortable">
-
+                    <ul id="pontosDisponiveis" class="connectedSortable">
                         @{
-                            var pontos = GetServiceHelper.GetService<PontoDao>().GetAllNotInPlayList(usuarioLogado.Empresa, Model.Pontos);
+                            var pontos = GetServiceHelper.GetService<PontoDao>().GetAllNotInPlayList(usuarioLogado.Empresa, Model.PlayListsPontos);
 
                             foreach (var ponto in pontos)
                             {
-                                <li class="ui-state-default">@Html.Label(ponto.Status ? "Ativo" : "Inativo") - @Html.Label(ponto.Nome)</li>
+                                <li class="ui-state-default" data-id="@Html.DisplayName(ponto.Id.ToString())">
+                                    @Html.Label(ponto.Nome)
+                                </li>
                             }
                         }
 
@@ -144,12 +149,13 @@
                     <h3 class="panel-title">Selecionados</h3>
                 </div>
                 <div class="panel-body">
-                    <ul id="sortable2" class="connectedSortable">
-                        
+                    <ul id="pontosSelecionados" class="connectedSortable">
                         @{
-                            foreach (var ponto in Model.Pontos)
+                            foreach (var ponto in Model.PlayListsPontos)
                             {
-                                <li class="ui-state-default">@Html.Label(ponto.Status ? "Ativo" : "Inativo") - @Html.Label(ponto.Nome)</li>
+                                <li class="ui-state-default" data-id="@Html.DisplayName(ponto.IdPonto.ToString())">
+                                     @Html.Label(ponto.Ponto.Nome)
+                                </li>
                             }
                         }
 
@@ -160,7 +166,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-default" onclick="return ValidaPlayList()" />
             </div>
         </div>
         </div>
@@ -174,10 +180,23 @@
 {
     <script src="../../Scripts/jquery-ui.js"></script>
     <script>
-        $(function () {
-            $("#sortable1, #sortable2").sortable({
-                connectWith: ".connectedSortable"
+        $(function() {
+            $(".connectedSortable").sortable({
+                connectWith: ".connectedSortable",
+                cursor: 'move',
+            //    update: function() {alert('teste')}
             }).disableSelection();
         });
+
+        function ValidaPlayList() {
+
+            var idsPontos = $("#pontosSelecionados li").map(function(i, e) { return { id: $(e).data('id'), ordem: i } }).get();
+            var idsMidias = $("#midiasSelecionadas li").map(function(i, e) { return { id: $(e).data('id'), ordem: i } }).get();
+
+            $("[id$=idsPontos]").val(JSON.stringify(idsPontos));
+            $("[id$=idsMidias]").val(JSON.stringify(idsMidias));
+
+            return true;
+        }
     </script>
 }
