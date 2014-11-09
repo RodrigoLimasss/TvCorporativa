@@ -19,6 +19,23 @@ namespace TvCorporativa.DAO
                 select p).ToList();
         }
 
+        public IList<Ponto> GetAll(FiltroPonto filtroPonto)
+        {
+            var query = (from p in Context.Pontos
+                select p);
+
+            if (!string.IsNullOrEmpty(filtroPonto.Nome))
+                query = query.Where(x => x.Nome.Equals(filtroPonto.Nome));
+
+            if(filtroPonto.Status)
+                query = query.Where(x => x.Status);
+
+            if(filtroPonto.IdEmpresa > 0)
+                query = query.Where(x => x.IdEmpresa.Equals(filtroPonto.IdEmpresa));
+
+            return query.ToList();
+        }
+
         public IList<Ponto> GetAllNotInPlayList(Empresa empresa, ICollection<PlayListsPontos> playListsPontos)
         {
             string query = " SELECT DISTINCT p.Id_Ponto as Id, p.Id_Empresa as IdEmpresa, p.Id_Template as IdTemplate, p.Nome, p.Status " +
@@ -30,9 +47,15 @@ namespace TvCorporativa.DAO
                 ? " AND p.Id_Ponto NOT IN (" + playListsPontos.Select(p => p.IdPonto.ToString()).Aggregate((a, b) => a + ", " + b) + ") "
                 : "";
                            
-
             return Context.Pontos.SqlQuery(query).ToList();
         }
 
+    }
+
+    public struct FiltroPonto
+    {
+        public string Nome { get; set; }
+        public bool Status { get; set; }
+        public int IdEmpresa { get; set; }
     }
 }

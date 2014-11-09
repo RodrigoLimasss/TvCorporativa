@@ -1,16 +1,23 @@
-﻿@model TvCorporativa.Models.PlayList
+﻿@using TvCorporativa.DAL
+@using TvCorporativa.DAO
+@model TvCorporativa.Models.PlayList
 
 @{
     ViewBag.Title = "Criar PlayList";
+    var usuarioLogado = ((TvCorporativa.Models.Usuario)Session["UsuarioLogado"]);
 }
+
+<link rel="stylesheet" href="../../Content/css/jquery-ui.css">
 
 <h2>Criar PlayList</h2>
 
 
-@using (Html.BeginForm("Create", "PlayList", FormMethod.Post)) 
-{ 
+@using (Html.BeginForm("Create", "PlayList", FormMethod.Post))
+{
     @Html.AntiForgeryToken()
-    
+    @Html.Hidden("idsPontos")
+    @Html.Hidden("idsMidias")
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true)
@@ -34,9 +41,6 @@
         <div class="form-group">
             @Html.Label("Data Início", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.DataInicio)
-                @Html.ValidationMessageFor(model => model.DataInicio)*@
-
                 @Html.TextBoxFor(model => model.DataInicio, "{0:dd/MM/yyyy}", new { @class = "datepiker maskData width120" })
                 @Html.ValidationMessageFor(model => model.DataInicio)
                 @Html.TextBox("HoraInicio", "", "{0:HH:mm}", new { @class = "maskHora width50" })
@@ -46,18 +50,96 @@
         <div class="form-group">
             @Html.Label("Data Fim", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.DataFim)
-                @Html.ValidationMessageFor(model => model.DataFim)*@
-
                 @Html.TextBoxFor(model => model.DataFim, "{0:dd/MM/yyyy}", new { @class = "datepiker maskData width120" })
                 @Html.ValidationMessageFor(model => model.DataFim)
                 @Html.TextBox("HoraFim", "", "{0:HH:mm}", new { @class = "maskHora width50" })
             </div>
         </div>
 
+        <hr />
+
+        <h4>Selecionar Mídias</h4>
+        <br />
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Disponíveis</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="midiasDisponiveis" class="connectedSortable">
+                        @{
+                            var midias = GetServiceHelper.GetService<MidiaDao>().GetAll(usuarioLogado.Empresa);
+
+                            foreach (var midia in midias)
+                            {
+                                <li class="ui-state-default" data-id="@Html.DisplayName(midia.Id.ToString())">
+                                    @Html.Label(midia.Nome).@Html.Label(midia.Extensao + " - " + midia.Tamanho)
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Selecionadas</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="midiasSelecionadas" class="connectedSortable">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <h4>Selecionar Pontos</h4>
+        <br />
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Disponíveis</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="pontosDisponiveis" class="connectedSortable">
+                        @{
+                            var pontos = GetServiceHelper.GetService<PontoDao>().GetAll(new FiltroPonto{IdEmpresa = usuarioLogado.Empresa.Id, Status = true});
+
+                            foreach (var ponto in pontos)
+                            {
+                                <li class="ui-state-default" data-id="@Html.DisplayName(ponto.Id.ToString())">
+                                    @Html.Label(ponto.Nome)
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Selecionados</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="pontosSelecionados" class="connectedSortable">
+ 
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-default" onclick="getPontosAndMidias()" />
             </div>
         </div>
     </div>
@@ -66,3 +148,8 @@
 <div>
     @Html.ActionLink("Voltar para lista", "Index")
 </div>
+
+@section Scripts
+{
+    <script src="../../Scripts/js/PlayList.js"></script>
+}

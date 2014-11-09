@@ -1,6 +1,5 @@
 ﻿@using TvCorporativa.DAL
 @using TvCorporativa.DAO
-@using TvCorporativa.Models
 @model TvCorporativa.Models.PlayList
 
 @{
@@ -166,7 +165,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" onclick="return ValidaPlayList()" />
+                <input type="submit" value="Salvar" class="btn btn-default" onclick="getPontosAndMidias()" />
             </div>
         </div>
         </div>
@@ -178,25 +177,5 @@
 
 @section Scripts
 {
-    <script src="../../Scripts/jquery-ui.js"></script>
-    <script>
-        $(function() {
-            $(".connectedSortable").sortable({
-                connectWith: ".connectedSortable",
-                cursor: 'move',
-            //    update: function() {alert('teste')}
-            }).disableSelection();
-        });
-
-        function ValidaPlayList() {
-
-            var idsPontos = $("#pontosSelecionados li").map(function(i, e) { return { id: $(e).data('id'), ordem: i } }).get();
-            var idsMidias = $("#midiasSelecionadas li").map(function(i, e) { return { id: $(e).data('id'), ordem: i } }).get();
-
-            $("[id$=idsPontos]").val(JSON.stringify(idsPontos));
-            $("[id$=idsMidias]").val(JSON.stringify(idsMidias));
-
-            return true;
-        }
-    </script>
+    <script src="../../Scripts/js/PlayList.js"></script>
 }

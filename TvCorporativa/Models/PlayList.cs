@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -41,6 +42,9 @@ namespace TvCorporativa.Models
         {
             foreach (var playListPonto in playListsPontos)
             {
+                if(PlayListsPontos == null)
+                    PlayListsPontos = new Collection<PlayListsPontos>();
+
                 if (!PlayListsPontos.Select(x => x.IdPonto).Contains(playListPonto.Ponto.Id))
                     PlayListsPontos.Add(playListPonto);
             }
@@ -50,6 +54,9 @@ namespace TvCorporativa.Models
         {
             foreach (var playListMidia in playListsMidias)
             {
+                if(PlayListsMidias == null)
+                    PlayListsMidias = new Collection<PlayListsMidias>();
+
                 if (!PlayListsMidias.Select(x => x.IdMidia).Contains(playListMidia.Midia.Id))
                     PlayListsMidias.Add(playListMidia);
             }
@@ -57,12 +64,14 @@ namespace TvCorporativa.Models
 
         public void ClearPontos()
         {
-            PlayListsPontos.Clear();
+            if(PlayListsPontos != null && PlayListsPontos.Any())
+                PlayListsPontos.Clear();
         }
 
         public void ClearMidias()
         {
-            PlayListsMidias.Clear();
+            if(PlayListsMidias != null && PlayListsMidias.Any())
+                PlayListsMidias.Clear();
         }
     }
 }
