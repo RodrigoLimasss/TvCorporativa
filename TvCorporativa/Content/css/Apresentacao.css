@@ -1,0 +1,14 @@
+﻿ul.affix {
+    position: static;
+}
+ul.affix-top {
+	position: static;
+}
+ul.affix-bottom {
+    position: absolute;
+}
+
+.nav-top {
+    position: relative;
+    top: -90px;
+}

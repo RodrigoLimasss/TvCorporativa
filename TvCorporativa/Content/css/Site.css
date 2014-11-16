@@ -82,6 +82,9 @@ textarea {
 }
 
 /* bootstrap overwrite */
+p {
+    margin: 0;
+}
 .navbar-inverse .navbar-nav > li > a {
     color: #fff;
 }
