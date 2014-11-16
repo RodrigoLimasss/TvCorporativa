@@ -6,10 +6,10 @@
 
 <h2>Feeds</h2>
 
-<p>
-    @Html.ActionLink("Criar Feed", "Create", null, new { @class = "btn btn-default" })
-</p>
-    
+                      <p class="col-md-4">
+                          @Html.ActionLink("Criar Feed", "Create", null, new { @class = "btn btn-default" })
+                      </p>
+                      @RenderPage("~/Views/Shared/_Busca.cshtml")
                       <div class="table-responsive">
                           <table class="table">
                               <tr>
