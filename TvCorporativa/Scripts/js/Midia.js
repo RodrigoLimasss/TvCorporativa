@@ -1,22 +1,30 @@
 ﻿$(function () {
     'use strict';
 
-    // Initialize the jQuery File Upload widget:
-    $('#fileupload').fileupload({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: 'server/php/'
+    $('#fileupload').fileupload();
+
+    $('#fileupload').fileupload('option', {
+        maxFileSize: 500000000,
+        resizeMaxWidth: 1920,
+        resizeMaxHeight: 1200
     });
 
-    // Enable iframe cross-domain access via redirect option:
-    $('#fileupload').fileupload(
-        'option',
-        'redirect',
-        window.location.href.replace(
-            /\/[^\/]*$/,
-            '/cors/result.html?%s'
-        )
-    );
+    // Initialize the jQuery File Upload widget:
+    //$('#fileupload').fileupload({
+    //    // Uncomment the following to send cross-domain cookies:
+    //    //xhrFields: {withCredentials: true},
+    //    url: 'server/php/'
+    //});
+
+    //// Enable iframe cross-domain access via redirect option:
+    //$('#fileupload').fileupload(
+    //    'option',
+    //    'redirect',
+    //    window.location.href.replace(
+    //        /\/[^\/]*$/,
+    //        '/cors/result.html?%s'
+    //    )
+    //);
 
     if (window.location.hostname === 'blueimp.github.io') {
         // Demo settings:

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense" xmlns:name="urn:fileuploadgroup-schema" >
+<xs:element name="fileUploadGroup">
+  <xs:complexType>
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="fileUpload" minOccurs="0">
+        <xs:complexType>
+          <xs:attribute name="configSource" type="xs:string" default="Web.FileUpload.config" use="optional"><xs:annotation><xs:documentation>Name of an external config file [Default: "Web.FileUpload.config"]</xs:documentation></xs:annotation></xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+</xs:schema>
