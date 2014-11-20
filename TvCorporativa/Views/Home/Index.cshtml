@@ -1,5 +1,7 @@
 ﻿@using TvCorporativa.DAL
 @using TvCorporativa.DAO
+
+
 @{
     ViewBag.Title = "Home";
     var usuarioLogado = ((TvCorporativa.Models.Usuario)Session["UsuarioLogado"]);
@@ -7,34 +9,30 @@
 
 <div class="jumbotron">
     <h1>Tv Corporativa</h1>
+    <p class="lead">Olá @Html.Label(usuarioLogado.Nome) seja Bem vindo!</p>
+    <p> Aqui você controla todos os pontos de comunicação de sua empresa.</p>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <h2>Olá @Html.Label(usuarioLogado.Nome) seja Bem vindo!</h2>
-        <p>
-            Aqui você controla todos os pontos de comunicação de sua empresa.
-        </p>
 
+@{
+    var pontos = GetServiceHelper.GetService<PontoDao>().GetAll(usuarioLogado.Empresa);
 
-        <div class="col-sm-12">
-
-            @{
-                var pontos = GetServiceHelper.GetService<PontoDao>().GetAll(usuarioLogado.Empresa);
-
-                foreach (var ponto in pontos)
-                {
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">@Html.Label(ponto.Nome) - @Html.Label(ponto.Status ? "Ativo" : "Inativo")</h3>
-                        </div>
-                        <div class="panel-body">
-                            O que ta rolando...
-                        </div>
-                    </div>
-                }
-            }
+    foreach (var ponto in pontos)
+    {
+ 
+        
+        <div class="col-sm-4">
+            
+            <div class="@( ponto.Status ? "panel panel-primary" : "panel panel-danger")">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Html.Label(ponto.Nome) - @Html.Label(ponto.Status ? "Ativo" : "Inativo")</h3>
+                </div>
+                <div class="panel-body">
+                    O que ta rolando?
+                    <br/><br/>
+                    @Html.ActionLink("Visualizar", "Visualizar", new { idPonto = ponto.Id, idEmpresa = ponto.IdEmpresa }, new { @target = "_blanck", @class = "btn btn-xs btn-warning" })
+                </div>
+            </div>
         </div>
+    }
+}
 
-
-    </div>
-</div>

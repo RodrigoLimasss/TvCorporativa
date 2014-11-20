@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width" />
         <title>@ViewBag.Title - Tv Corporativa</title>
         @RenderPage("_Head.cshtml")
+        @RenderSection("styles", false)
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top">
@@ -56,13 +57,17 @@
         </div>
 
         <div class="container">
-            @RenderBody()
-            
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Tv Corporativa</p>
-            </footer>
+            <div class="row">
+                @RenderBody()
+            </div>
         </div>
+
+        <br/><br/><br />
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; @DateTime.Now.Year - Tv Corporativa</p>
+            </div>
+        </footer>
         @RenderSection("Scripts", false)
     </body>
 </html>
@@ -72,7 +77,5 @@
         $("#ulMenu li a").click(function() {
             $(this).parent().addClass("active");
         });
-
-
     });
 </script>
