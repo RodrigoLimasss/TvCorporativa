@@ -29,6 +29,14 @@
                 @Html.ValidationMessageFor(model => model.Nome)
             </div>
         </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeAmigavel, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomeAmigavel)
+                @Html.ValidationMessageFor(model => model.NomeAmigavel)
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.Label("Endereço", new { @class = "control-label col-md-2" })

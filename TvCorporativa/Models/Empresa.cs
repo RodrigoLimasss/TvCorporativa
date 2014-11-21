@@ -8,6 +8,7 @@ namespace TvCorporativa.Models
         [Column("Id_Empresa")]
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string NomeAmigavel { get; set; }
 
         [Column("Data_Criacao")]
         public DateTime DataCriacao { get; set; }

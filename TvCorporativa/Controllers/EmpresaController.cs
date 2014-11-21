@@ -35,7 +35,7 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Nome,Status,Endereco,Telefone,Cnpj")] Empresa empresa)
+        public ActionResult Create([Bind(Include = "Nome,NomeAmigavel,Status,Endereco,Telefone,Cnpj")] Empresa empresa)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,DataCriacao,Status,Endereco,Telefone,Cnpj")] Empresa empresa)
+        public ActionResult Edit([Bind(Include = "Id,Nome,NomeAmigavel,DataCriacao,Status,Endereco,Telefone,Cnpj")] Empresa empresa)
         {
             if (ModelState.IsValid)
             {
