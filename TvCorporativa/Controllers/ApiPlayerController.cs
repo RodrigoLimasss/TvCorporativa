@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 using Newtonsoft.Json;
 using TvCorporativa.DAL;
 using TvCorporativa.DAO;
@@ -12,40 +11,70 @@ namespace TvCorporativa.Controllers
 {
     public class ApiPlayerController : ApiController
     {
-        // GET api/<controller>
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new[] { "value1", "value2" };
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        public string Get(int idPonto)
         {
-            return "value";
+            var ponto = GetServiceHelper.GetService<PontoDao>().Get(idPonto);
+            
+            var playLists = GetServiceHelper.GetService<PlayListDao>()
+                .GetPorPontoData(idPonto)
+                .Select(p =>
+                    new
+                    {
+                        p.Id,
+                        p.Nome,
+                        p.DataInicio,
+                        p.DataFim,
+                        midias = p.PlayListsMidias.Where(m => m.Midia.Status).OrderBy(m => m.Ordem)
+                            .Select(m => new {m.IdMidia, m.Ordem, m.Midia.Nome, m.Midia.Extensao})}
+                    );
+
+            var newObject = new 
+            {
+                playLists,
+                template = ponto.Template.Html
+            };
+
+            return JsonConvert.SerializeObject(newObject);
         }
 
-        // POST api/<controller>
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/<controller>/5
         public void Delete(int id)
         {
         }
 
-        public string Teste(int idPonto)
+        public bool VerificaParaSincronizar(int idPonto)
         {
-            return
-                JsonConvert.SerializeObject(
-                    GetServiceHelper.GetService<PlayListDao>()
-                        .GetPorPonto(idPonto)
-                        .Select(p => new {p.Id, p.Nome, p.Status, p.DataInicio, p.DataFim}));
+            try
+            {
+                var repoPonto = GetServiceHelper.GetService<PontoDao>();
+                var ponto = repoPonto.Get(idPonto);
+
+                if (ponto.Sincronizar)
+                {
+                    ponto.Sincronizar = false;
+                    repoPonto.Save(ponto);
+
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

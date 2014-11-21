@@ -18,8 +18,6 @@
 
     foreach (var ponto in pontos)
     {
- 
-        
         <div class="col-sm-4">
             
             <div class="@( ponto.Status ? "panel panel-primary" : "panel panel-danger")">
@@ -30,9 +28,23 @@
                     O que ta rolando?
                     <br/><br/>
                     @Html.ActionLink("Visualizar", "Visualizar", new { idPonto = ponto.Id, idEmpresa = ponto.IdEmpresa }, new { @target = "_blanck", @class = "btn btn-xs btn-warning" })
+                    
+                    @{
+                        if (ponto.Status)
+                        {
+                            <a href="javascript:void(0)" onclick="sincronizarPonto(@(ponto.Id))" class="btn btn-xs btn-success">Sincronizar</a>
+                            <img id="imgLoad@(ponto.Id)" src="../../img/loading.gif" class="imgLoad16 displayNone" />
+                            <span id="spanSuccess@(ponto.Id)" class="displayNone"></span>        
+                        }
+                    }
+                    
                 </div>
             </div>
         </div>
     }
 }
 
+@section Scripts
+{
+    <script src="~/Scripts/js/Home.js"></script>
+}

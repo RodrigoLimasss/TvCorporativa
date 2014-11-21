@@ -11,6 +11,7 @@ namespace TvCorporativa.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public bool Status { get; set; }
+        public bool Sincronizar { get; set; }
 
         [Column("Id_Empresa")]
         public int IdEmpresa { get; set; }

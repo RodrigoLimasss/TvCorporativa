@@ -1,56 +1,63 @@
 ﻿@model IEnumerable<TvCorporativa.Models.Ponto>
+    @{
+        ViewBag.Title = "Pontos";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-@{
-    ViewBag.Title = "Pontos";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    <h2>Pontos</h2>
 
-<h2>Pontos</h2>
+    <p class="col-md-4">
+        @Html.ActionLink("Criar Ponto", "Create", null, new { @class = "btn btn-default" })
+    </p>
+    @RenderPage("~/Views/Shared/_Busca.cshtml")
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Template)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Empresa)
+                </th>
+                <th></th>
+            </tr>
 
-                      <p class="col-md-4">
-                          @Html.ActionLink("Criar Ponto", "Create", null, new { @class = "btn btn-default" })
-                      </p>
-                      @RenderPage("~/Views/Shared/_Busca.cshtml")
-                      <div class="table-responsive">
-                          <table class="table table-hover">
-                              <tr>
-                                  <th>
-                                      @Html.DisplayNameFor(model => model.Status)
-                                  </th>
-                                  <th>
-                                      @Html.DisplayNameFor(model => model.Nome)
-                                  </th>
-                                  <th>
-                                      @Html.DisplayNameFor(model => model.Template)
-                                  </th>
-                                  <th>
-                                      @Html.DisplayNameFor(model => model.Empresa)
-                                  </th>
-                                  <th></th>
-                              </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.Label(item.Status ? "Ativo" : "Inativo", new { @class = item.Status ? "label label-success" : "label label-danger" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Template.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Empresa.Nome)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" }) |
+                        @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');", @class = "btn btn-xs btn-danger" }) |
+                        @Html.ActionLink("Visualizar", "Visualizar", new { idPonto = item.Id, idEmpresa = item.IdEmpresa }, new { @target = "_blanck", @class = "btn btn-xs btn-warning" }) |
+                        <a href="javascript:void(0)" onclick="sincronizarPonto(@(item.Id))" class="btn btn-xs btn-success">Sincronizar</a>
+                        <img id="imgLoad@(item.Id)" src="../../img/loading.gif" class="imgLoad16 displayNone" />
+                        <span id="spanSuccess@(item.Id)" class="displayNone"></span>
+                    </td>
+                </tr>
+            }
 
-                              @foreach (var item in Model)
-                              {
-                                  <tr>
-                                      <td>
-                                          @Html.Label(item.Status ? "Ativo" : "Inativo", new { @class = item.Status ? "label label-success" : "label label-danger" })
-                                      </td>
-                                      <td>
-                                          @Html.DisplayFor(modelItem => item.Nome)
-                                      </td>
-                                      <td>
-                                          @Html.DisplayFor(modelItem => item.Template.Nome)
-                                      </td>
-                                      <td>
-                                          @Html.DisplayFor(modelItem => item.Empresa.Nome)
-                                      </td>
-                                      <td>
-                                          @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" }) |
-                                          @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { onclick = "return confirm('Você tem certeza que deseja excluir?');", @class = "btn btn-xs btn-danger" }) |
-                                          @Html.ActionLink("Visualizar", "Visualizar", new { idPonto = item.Id, idEmpresa = item.IdEmpresa }, new { @target = "_blanck", @class = "btn btn-xs btn-warning" })
-                                      </td>
-                                  </tr>
-                              }
+        </table>
+    </div>
 
-                          </table>
-</div>
+    @section Scripts
+{
+        <script src="~/Scripts/js/Home.js"></script>
+    }

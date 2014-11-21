@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TvCorporativa.DAL;
 using TvCorporativa.Models;
@@ -38,7 +37,7 @@ namespace TvCorporativa.DAO
 
         public IList<Ponto> GetAllNotInPlayList(Empresa empresa, ICollection<PlayListsPontos> playListsPontos)
         {
-            string query = " SELECT DISTINCT p.Id_Ponto as Id, p.Id_Empresa as IdEmpresa, p.Id_Template as IdTemplate, p.Nome, p.Status " +
+            string query = " SELECT DISTINCT p.Id_Ponto as Id, p.Id_Empresa as IdEmpresa, p.Id_Template as IdTemplate, p.Nome, p.Status, p.Sincronizar " +
                            " FROM ponto_tv p " +
                            " LEFT JOIN PONTO_PLAYLIST pp on pp.Id_Ponto = p.Id_Ponto " +
                            " WHERE p.Id_Empresa = " + empresa.Id +
@@ -52,7 +51,7 @@ namespace TvCorporativa.DAO
 
         public IList<Ponto> GetAllNotInFeed(Empresa empresa, ICollection<FeedPonto> feedsPontos)
         {
-            string query = " SELECT DISTINCT p.Id_Ponto as Id, p.Id_Empresa as IdEmpresa, p.Id_Template as IdTemplate, p.Nome, p.Status " +
+            string query = " SELECT DISTINCT p.Id_Ponto as Id, p.Id_Empresa as IdEmpresa, p.Id_Template as IdTemplate, p.Nome, p.Status, p.Sincronizar " +
                            " FROM ponto_tv p " +
                            " LEFT JOIN FEED_PONTO fp on fp.Id_Ponto = p.Id_Ponto " +
                            " WHERE p.Id_Empresa = " + empresa.Id +

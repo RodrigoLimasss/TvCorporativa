@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -37,6 +38,18 @@ namespace TvCorporativa.DAO
             return (from p in Context.PlayList
                     where p.PlayListsPontos.Any(x => x.IdPonto == idPonto)
                 select p).ToList();
+        }
+
+        public IList<PlayList> GetPorPontoData(int idPonto)
+        {
+            return (from p in Context.PlayList
+                    where p.PlayListsPontos.Any(x => x.IdPonto == idPonto)
+                    && p.Status
+                    && p.DataInicio <= DateTime.Now
+                    && p.DataFim >= DateTime.Now
+                    select p)
+                    .OrderBy(p => p.DataInicio)
+                    .ToList();
         }
 
         public void AddPontosAndMidias(PlayList playList, IList<KeyValuePair<int, int>> pontosOrdem, IList<KeyValuePair<int, int>> midiasOrdem)

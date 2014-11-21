@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Controllers.Base;
 using TvCorporativa.DAL;
@@ -25,6 +26,24 @@ namespace TvCorporativa.Controllers
             var empresa = GetServiceHelper.GetService<EmpresaDao>().Get((int)idEmpresa);
 
             return Redirect(string.Format("~/Player/Execute/{0}/{1}", empresa.Nome, idPonto));
+        }
+
+        [HttpPost]
+        public ActionResult SincronizarPonto(int idPonto)
+        {
+            try
+            {
+                var repoPonto = GetServiceHelper.GetService<PontoDao>();
+                var ponto = repoPonto.Get(idPonto);
+                ponto.Sincronizar = true;
+                repoPonto.Save(ponto);
+
+                return Json("true", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json("false", JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

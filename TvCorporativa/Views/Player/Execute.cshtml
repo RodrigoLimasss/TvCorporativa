@@ -3,11 +3,14 @@
     ViewBag.Title = "Player";
     Layout = null;
 }
-
-<h2>Player</h2>
-
-<div id="playList"></div>
-
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
 @InputExtensions.Hidden(Html, "IdPonto", ViewBag.HiddenIdPonto)
 
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.11.1.min.js")"></script>
