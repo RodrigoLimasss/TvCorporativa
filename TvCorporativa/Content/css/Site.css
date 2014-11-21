@@ -123,6 +123,14 @@ p {
     height: 16px;
 }
 
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
 .connectedSortable {
     border: 1px solid #eee;
     width: 100%;

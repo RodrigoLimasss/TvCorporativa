@@ -65,7 +65,8 @@
         <br/><br/><br />
         <footer class="footer">
             <div class="container">
-                <p>&copy; @DateTime.Now.Year - Tv Corporativa</p>
+                <p class="floatLeft">&copy; @DateTime.Now.Year - Tv Corporativa</p>
+                @Html.ActionLink("Apresentação", "Index", "Apresentacao", null, new { @class = "floatRight"})
             </div>
         </footer>
         @RenderSection("Scripts", false)

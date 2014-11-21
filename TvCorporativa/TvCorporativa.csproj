@@ -307,7 +307,6 @@
     <Content Include="Content\FileUpload\img\progressbar.gif" />
     <Content Include="Content\FileUpload\img\progressblue.gif" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Files\mov_bbb.mp4" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -355,6 +354,7 @@
     <Content Include="Scripts\js\Home.js" />
     <Content Include="Scripts\js\Midia.js" />
     <Content Include="Scripts\js\PlayList.js" />
+    <Content Include="Scripts\js\Ponto.js" />
     <Content Include="Scripts\js\Util.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\js\webApi.js" />
@@ -396,7 +396,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Files\Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -412,7 +411,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="InfraEstrutura\Upload\UploadHandler.ashx" />
-    <Content Include="Files\mov_bbb.ogg" />
     <None Include="Scripts\Web.FileUpload.config" />
     <None Include="Scripts\Web.FileUpload.xsd">
       <SubType>Designer</SubType>
