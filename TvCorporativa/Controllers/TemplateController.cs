@@ -33,7 +33,7 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IdEmpresa,Nome,Html")] Template template)
+        public ActionResult Create([Bind(Include = "Id,IdEmpresa,Status,Nome,Html")] Template template)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Nome,Html")] Template template)
+        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Status,Nome,Html")] Template template)
         {
             if (ModelState.IsValid)
             {

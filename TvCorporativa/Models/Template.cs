@@ -8,6 +8,7 @@ namespace TvCorporativa.Models
         [Column("Id_Template")]
         public int Id { get; set; }
         public string Nome { get; set; }
+        public bool Status { get; set; }
         
         [AllowHtml]
         public string Html { get; set; }
