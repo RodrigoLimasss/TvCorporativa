@@ -1,4 +1,7 @@
-﻿@model TvCorporativa.Models.Template
+﻿@using TvCorporativa.DAL
+@using TvCorporativa.DAO
+@using TvCorporativa.Models
+@model TvCorporativa.Models.Template
 
 @{
     ViewBag.Title = "Editar Template";
@@ -44,6 +47,26 @@
                 @Html.ValidationMessageFor(model => model.Html)
             </div>
         </div>
+        
+        <div class="form-group">
+                <h4>Pontos que utilizam este Template:</h4>
+                    <ul>
+                        @{
+                            var pontos = GetServiceHelper.GetService<PontoDao>().GetAll(Model);
+
+                            if (!pontos.Any())
+                            {
+                                <p>Template não utilizado</p>
+                            }
+
+                            foreach (var ponto in pontos)
+                            {
+                                <li>@Html.Label(ponto.Nome) - @Html.Label(ponto.Empresa.Nome)</li>
+                            }
+                        }
+                    </ul>
+            </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Salvar" class="btn btn-default" />

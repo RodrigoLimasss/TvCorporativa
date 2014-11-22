@@ -35,6 +35,13 @@ namespace TvCorporativa.DAO
             return query.ToList();
         }
 
+        public IList<Ponto> GetAll(Template template)
+        {
+            return (from p in Context.Pontos
+                where p.Template.Id == template.Id
+                select p).ToList();
+        }
+
         public IList<Ponto> GetAllNotInPlayList(Empresa empresa, ICollection<PlayListsPontos> playListsPontos)
         {
             string query = " SELECT DISTINCT p.Id_Ponto as Id, p.Id_Empresa as IdEmpresa, p.Id_Template as IdTemplate, p.Nome, p.Status, p.Sincronizar " +
