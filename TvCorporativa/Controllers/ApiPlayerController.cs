@@ -18,8 +18,11 @@ namespace TvCorporativa.Controllers
 
         public string Get(int idPonto)
         {
-            var ponto = GetServiceHelper.GetService<PontoDao>().Get(idPonto);
-            
+            var repoPonto = GetServiceHelper.GetService<PontoDao>();
+            var ponto = repoPonto.Get(idPonto);
+            ponto.Sincronizar = false;
+            repoPonto.Save(ponto);
+
             var playLists = GetServiceHelper.GetService<PlayListDao>()
                 .GetPorPontoData(idPonto)
                 .Select(p =>
@@ -38,7 +41,7 @@ namespace TvCorporativa.Controllers
                 playLists,
                 template = ponto.Template.Html
             };
-
+            
             return JsonConvert.SerializeObject(newObject);
         }
 
@@ -58,18 +61,9 @@ namespace TvCorporativa.Controllers
         {
             try
             {
-                var repoPonto = GetServiceHelper.GetService<PontoDao>();
-                var ponto = repoPonto.Get(idPonto);
+                var ponto = GetServiceHelper.GetService<PontoDao>().Get(idPonto);
 
-                if (ponto.Sincronizar)
-                {
-                    ponto.Sincronizar = false;
-                    repoPonto.Save(ponto);
-
-                    return true;
-                }
-
-                return false;
+                return ponto.Sincronizar;
             }
             catch (Exception)
             {

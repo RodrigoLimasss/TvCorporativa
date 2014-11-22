@@ -70,7 +70,7 @@ function VerificaParaSincronizar() {
                         montaPlayer();
                     }
 
-                }, 1000);
+                }, 100);
             }
 
             console.log(data);
