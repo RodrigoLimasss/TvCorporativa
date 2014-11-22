@@ -16,6 +16,9 @@
                                   <th>
                                       @Html.DisplayNameFor(model => model.Nome)
                                   </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Empresa)
+                                  </th>
                                   <th></th>
                               </tr>
 
@@ -24,6 +27,9 @@
                                   <tr>
                                       <td>
                                           @Html.DisplayFor(modelItem => item.Nome)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Empresa.Nome)
                                       </td>
                                       <td>
                                           @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" }) |

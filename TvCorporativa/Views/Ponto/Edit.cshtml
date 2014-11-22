@@ -36,7 +36,7 @@
             @Html.LabelFor(model => model.Template, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.IdTemplate, (IEnumerable<SelectListItem>)ViewBag.DropdownTemplates, "-- Selecione o Template --", new { @class = "height25" })
-                @Html.ValidationMessageFor(model => model.Nome)
+                @Html.ValidationMessageFor(model => model.Template)
             </div>
         </div>
         
@@ -44,7 +44,7 @@
             @Html.LabelFor(model => model.Empresa, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.IdEmpresa, (IEnumerable<SelectListItem>)ViewBag.DropDownEmpresas, "-- Selecione a Empresa --", new { @class = "height25" })
-                @Html.ValidationMessageFor(model => model.Nome)
+                @Html.ValidationMessageFor(model => model.Empresa)
             </div>
         </div>
 

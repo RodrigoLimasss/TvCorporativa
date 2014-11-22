@@ -11,5 +11,9 @@ namespace TvCorporativa.Models
         
         [AllowHtml]
         public string Html { get; set; }
+
+        [Column("Id_Empresa")]
+        public int IdEmpresa { get; set; }
+        public virtual Empresa Empresa { get; set; }
     }
 }

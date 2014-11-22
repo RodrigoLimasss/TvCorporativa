@@ -48,7 +48,9 @@ namespace TvCorporativa.DAL
             modelBuilder.Entity<Ponto>().HasRequired(x => x.Template).WithMany().HasForeignKey(x => x.IdTemplate);
             modelBuilder.Entity<Ponto>().HasMany(x => x.PlayListsPontos).WithRequired(x => x.Ponto).HasForeignKey(x => x.IdPonto);
             modelBuilder.Entity<Ponto>().HasMany(x => x.FeedsPontos).WithRequired(x => x.Ponto).HasForeignKey(x => x.IdPonto);
-            
+
+            modelBuilder.Entity<Template>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
+
             modelBuilder.Entity<Usuario>().HasRequired(x => x.Empresa).WithMany().HasForeignKey(x => x.IdEmpresa);
         }
     }

@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Controllers.Base;
+using TvCorporativa.DAL;
 using TvCorporativa.DAO;
 using TvCorporativa.Models;
 
@@ -25,12 +27,13 @@ namespace TvCorporativa.Controllers
 
         public ActionResult Create()
         {
+            MontaDropDownEmpresas();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Nome,Html")] Template template)
+        public ActionResult Create([Bind(Include = "Id,IdEmpresa,Nome,Html")] Template template)
         {
             if (ModelState.IsValid)
             {
@@ -52,12 +55,13 @@ namespace TvCorporativa.Controllers
             {
                 return HttpNotFound();
             }
+            MontaDropDownEmpresas();
             return View(template);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Nome,Html")] Template template)
+        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,Nome,Html")] Template template)
         {
             if (ModelState.IsValid)
             {
@@ -81,6 +85,15 @@ namespace TvCorporativa.Controllers
             _templateDao.Delete(template);
 
             return RedirectToAction("Index");
+        }
+
+        private void MontaDropDownEmpresas()
+        {
+            var dropDownDataList = GetServiceHelper.GetService<EmpresaDao>().GetAll();
+
+            var dropDownOptions = dropDownDataList.Select(t => new SelectListItem { Text = t.Nome, Value = t.Id.ToString() });
+
+            ViewBag.DropDownEmpresas = dropDownOptions;
         }
     }
 }
