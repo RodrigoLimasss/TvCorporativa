@@ -39,7 +39,9 @@ namespace TvCorporativa.Controllers
             var newObject = new 
             {
                 playLists,
-                template = ponto.Template.Html
+                template = ponto.Template.Html,
+                idEmpresa = ponto.Empresa.Id,
+                ponto.Empresa.NomeAmigavel
             };
             
             return JsonConvert.SerializeObject(newObject);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TvCorporativa.DAL;
 using TvCorporativa.DAO;
 
@@ -23,6 +19,7 @@ namespace TvCorporativa.Controllers
                 return View("Error");
 
             ViewBag.HiddenIdPonto = idPonto;
+            ViewBag.HiddenNomeAmigavel = oEmpresa.NomeAmigavel;
 
             return View();
         }

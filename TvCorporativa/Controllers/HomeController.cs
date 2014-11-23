@@ -25,7 +25,7 @@ namespace TvCorporativa.Controllers
 
             var empresa = GetServiceHelper.GetService<EmpresaDao>().Get((int)idEmpresa);
 
-            return Redirect(string.Format("~/Player/Execute/{0}/{1}", empresa.Nome, idPonto));
+            return Redirect(string.Format("~/Player/Execute/{0}/{1}", empresa.NomeAmigavel, idPonto));
         }
 
         [HttpPost]
