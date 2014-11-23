@@ -13,7 +13,9 @@ namespace TvCorporativa.DAO
 
         public override IList<Template> GetAll(Empresa empresa)
         {
-            throw new System.NotImplementedException();
+            return (from p in Context.Templates
+                where p.Empresa.Id == empresa.Id
+                select p).ToList();
         }
 
     }

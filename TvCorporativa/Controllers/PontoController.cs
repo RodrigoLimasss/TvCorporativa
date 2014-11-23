@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using TvCorporativa.Controllers.Base;
 using TvCorporativa.DAL;
 using TvCorporativa.DAO;
@@ -30,7 +32,7 @@ namespace TvCorporativa.Controllers
 
         public ActionResult Create()
         {
-            MontaDropDownTemplates();
+            MontaDropDownTemplates(null);
             MontaDropDownEmpresas();
             return View();
         }
@@ -60,7 +62,7 @@ namespace TvCorporativa.Controllers
             {
                 return HttpNotFound();
             }
-            MontaDropDownTemplates();
+            MontaDropDownTemplates(ponto.Empresa);
             MontaDropDownEmpresas();
             return View(ponto);
         }
@@ -102,9 +104,11 @@ namespace TvCorporativa.Controllers
             return Redirect(string.Format("~/Player/Execute/{0}/{1}", empresa.Nome, idPonto));
         }
 
-        private void MontaDropDownTemplates()
+        private void MontaDropDownTemplates(Empresa empresa)
         {
-            var dropDownDataList = GetServiceHelper.GetService<TemplateDao>().GetAll();
+            var dropDownDataList = empresa != null
+                ? GetServiceHelper.GetService<TemplateDao>().GetAll(empresa)
+                : GetServiceHelper.GetService<TemplateDao>().GetAll();
 
             var dropDownOptions = dropDownDataList.Select(t => new SelectListItem { Text = t.Nome, Value = t.Id.ToString() });
 
@@ -118,6 +122,17 @@ namespace TvCorporativa.Controllers
             var dropDownOptions = dropDownDataList.Select(t => new SelectListItem { Text = t.Nome, Value = t.Id.ToString() });
 
             ViewBag.DropDownEmpresas = dropDownOptions;
+        }
+
+        [HttpPost]
+        public string AtualizarDropTemplate(int idEmpresa)
+        {
+            var empresa = GetServiceHelper.GetService<EmpresaDao>().Get(idEmpresa);
+            var dropDownDataList = GetServiceHelper.GetService<TemplateDao>().GetAll(empresa);
+
+            var dropDownOptions = dropDownDataList.Select(t => new { Text = t.Nome, Value = t.Id.ToString() });
+
+            return JsonConvert.SerializeObject(dropDownOptions);
         }
     }
 }
