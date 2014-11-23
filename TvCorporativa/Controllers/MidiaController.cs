@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using TvCorporativa.Controllers.Base;
+using TvCorporativa.InfraEstrutura;
 using TvCorporativa.Models;
 using TvCorporativa.DAO;
 
@@ -55,7 +56,7 @@ namespace TvCorporativa.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,IdEmpresa,Nome,Extensao,Tamanho")] Midia midia)
+        public ActionResult Edit([Bind(Include="Id,IdEmpresa,Status,Nome,Extensao,Tamanho")] Midia midia)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +78,9 @@ namespace TvCorporativa.Controllers
                 return HttpNotFound();
             }
             _midiaDao.Delete(midia);
+
+            GerenciarMidia.DeletarMidiaDirectory(string.Format("{0}{1}", midia.Nome, midia.Extensao), midia.IdEmpresa);
+
             return RedirectToAction("Index");
         }
     }

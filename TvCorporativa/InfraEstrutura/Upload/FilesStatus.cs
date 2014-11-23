@@ -5,7 +5,7 @@ namespace TvCorporativa.InfraEstrutura.Upload
 {
     public class FilesStatus
     {
-        public const string HandlerPath = "/Upload/";
+        public const string HandlerPath = "/InfraEstrutura/Upload/";
 
         public string group { get; set; }
         public string name { get; set; }
@@ -20,9 +20,15 @@ namespace TvCorporativa.InfraEstrutura.Upload
 
         public FilesStatus() { }
 
-        public FilesStatus(FileInfo fileInfo) { SetValues(fileInfo.Name, (int)fileInfo.Length, fileInfo.FullName); }
+        public FilesStatus(FileInfo fileInfo)
+        {
+            SetValues(fileInfo.Name, (int)fileInfo.Length, fileInfo.FullName);
+        }
 
-        public FilesStatus(string fileName, int fileLength, string fullPath) { SetValues(fileName, fileLength, fullPath); }
+        public FilesStatus(string fileName, int fileLength, string fullPath)
+        {
+            SetValues(fileName, fileLength, fullPath);
+        }
 
         private void SetValues(string fileName, int fileLength, string fullPath)
         {

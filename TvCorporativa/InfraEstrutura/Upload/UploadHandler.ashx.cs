@@ -3,25 +3,36 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Web.SessionState;
+using TvCorporativa.Models;
 
 namespace TvCorporativa.InfraEstrutura.Upload
 {
-    /// <summary>
-    /// Summary description for UploadHandler
-    /// </summary>
-    public class UploadHandler : IHttpHandler
+    public class UploadHandler : IHttpHandler, IRequiresSessionState
     {
         private readonly JavaScriptSerializer _js;
 
-        private string StorageRoot
+        private static string StorageRoot
         {
-            get { return Path.Combine(HttpContext.Current.Server.MapPath("~/Files/")); } //Path should! always end with '/'
+            get
+            {
+                var diretory = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("~/Files/{0}/", Empresa.Id)));
+
+                if (!Directory.Exists(diretory))
+                    Directory.CreateDirectory(diretory);
+
+                return diretory;
+            } 
+        }
+
+        private static Empresa Empresa
+        {
+            get { return ((Usuario) HttpContext.Current.Session["UsuarioLogado"]).Empresa; }
         }
 
         public UploadHandler()
         {
-            _js = new JavaScriptSerializer();
-            _js.MaxJsonLength = 41943040;
+            _js = new JavaScriptSerializer {MaxJsonLength = 41943040};
         }
 
         public bool IsReusable { get { return false; } }
@@ -34,7 +45,6 @@ namespace TvCorporativa.InfraEstrutura.Upload
             HandleMethod(context);
         }
 
-        // Handle request based on method
         private void HandleMethod(HttpContext context)
         {
             switch (context.Request.HttpMethod)
@@ -42,7 +52,7 @@ namespace TvCorporativa.InfraEstrutura.Upload
                 case "HEAD":
                 case "GET":
                     if (GivenFilename(context)) DeliverFile(context);
-                    else ListCurrentFiles(context);
+                    //else ListCurrentFiles(context);
                     break;
 
                 case "POST":
@@ -74,11 +84,14 @@ namespace TvCorporativa.InfraEstrutura.Upload
         // Delete file from the server
         private void DeleteFile(HttpContext context)
         {
+            if(context.Request["f"] == null)
+                return;
+
             var filePath = StorageRoot + context.Request["f"];
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
+            GerenciarMidia.DeletarMidiaDirectory(filePath);
+
+            var idMidia = int.Parse(Path.GetFileNameWithoutExtension(filePath).Split('_').Last());
+            GerenciarMidia.DeletarMidia(idMidia);
         }
 
         // Upload file to the server
@@ -129,11 +142,14 @@ namespace TvCorporativa.InfraEstrutura.Upload
             {
                 var file = context.Request.Files[i];
 
-                var fullPath = StorageRoot + Path.GetFileName(file.FileName);
+                var midia = GerenciarMidia.SalvarMidia(file, Empresa);
+                var fileName = string.Format("{0}{1}", midia.Nome, midia.Extensao);
 
+                var fullPath = StorageRoot + Path.GetFileName(fileName);
+                
                 file.SaveAs(fullPath);
 
-                string fullName = Path.GetFileName(file.FileName);
+                string fullName = Path.GetFileName(fileName);
                 statuses.Add(new FilesStatus(fullName, file.ContentLength, fullPath));
             }
         }

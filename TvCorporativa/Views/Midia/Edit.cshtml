@@ -16,6 +16,8 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.IdEmpresa)
+        @Html.HiddenFor(model => model.Extensao)
+        @Html.HiddenFor(model => model.Tamanho)
         
         <div class="form-group">
             @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
@@ -28,12 +30,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome)
+                @Html.TextBoxFor(model => model.Nome, new {@class = "width300"})
                 @Html.ValidationMessageFor(model => model.Nome)
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.Label("Extensão", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Extensao)
@@ -47,7 +49,7 @@
                 @Html.EditorFor(model => model.Tamanho)
                 @Html.ValidationMessageFor(model => model.Tamanho)
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

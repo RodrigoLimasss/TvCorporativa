@@ -179,6 +179,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="InfraEstrutura\Autenticacao\AutorizacaoFilterAttribute.cs" />
+    <Compile Include="InfraEstrutura\GerenciarMidia.cs" />
     <Compile Include="InfraEstrutura\Upload\FilesStatus.cs" />
     <Compile Include="InfraEstrutura\Upload\UploadHandler.ashx.cs">
       <DependentUpon>UploadHandler.ashx</DependentUpon>
