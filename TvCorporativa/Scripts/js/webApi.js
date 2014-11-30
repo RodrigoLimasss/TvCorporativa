@@ -25,8 +25,18 @@ function montaPlayer() {
             var object = JSON.parse(data);
 
             idEmpresa = object.idEmpresa;
-            nomeAmigavel = object.nomeAmigavel;
+            nomeAmigavel = object.NomeAmigavel;
             var template = object.template;
+
+            if (object.playLists.length == 0) {
+                document.write("Ponto sem PlayList");
+                return;
+            }
+            if (object.playLists[0].midias.length == 0) {
+                document.write("PlayList sem Mídia");
+                return;
+            }
+
             var arrayVideos = object.playLists[0].midias.map(function (e) { return e.Nome + "." + e.Extensao; });
             var index = 0;
 
