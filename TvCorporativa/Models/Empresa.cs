@@ -16,5 +16,6 @@ namespace TvCorporativa.Models
         public string Endereco { get; set; }
         public string Telefone { get; set; }
         public string Cnpj { get; set; }
+        public string Logo { get; set; }
     }
 }

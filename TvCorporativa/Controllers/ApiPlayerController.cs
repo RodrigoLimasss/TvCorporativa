@@ -41,6 +41,7 @@ namespace TvCorporativa.Controllers
                 playLists,
                 template = ponto.Template.Html,
                 idEmpresa = ponto.Empresa.Id,
+                logo = ponto.Empresa.Logo,
                 ponto.Empresa.NomeAmigavel
             };
             

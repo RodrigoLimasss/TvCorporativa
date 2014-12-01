@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
+using TvCorporativa.Annotations;
 
 namespace TvCorporativa.Models
 {
@@ -16,5 +18,7 @@ namespace TvCorporativa.Models
         [Column("Id_Empresa")]
         public int IdEmpresa { get; set; }
         public virtual Empresa Empresa { get; set; }
+
+        public virtual ICollection<Ponto> Pontos { get; [UsedImplicitly] private set; }
     }
 }

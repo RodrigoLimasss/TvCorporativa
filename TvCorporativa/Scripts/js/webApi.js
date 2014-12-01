@@ -42,6 +42,9 @@ function montaPlayer() {
 
             $("body").html(template);
 
+            MontaLogo(object.logo);
+            MontaHora();
+            MontaFeed();
             createPlayerVideo(idEmpresa, arrayVideos[0]);
             $("#video1").get(0).play();
 
@@ -92,8 +95,41 @@ function VerificaParaSincronizar() {
 
                 }, 100);
             }
-
-            console.log(data);
         }
     });
+}
+
+function MontaHora() {
+    
+    var date = new Date();
+    $("#hora").text(date.getHours() + ":" + date.getMinutes());
+
+    var intervalHora = setInterval(function () {
+        var intervalDate = new Date();
+        $("#hora").text(intervalDate.getHours() + ":" + intervalDate.getMinutes());
+    }, 60000);
+}
+
+function MontaLogo(nameLogo) {
+    $("#imgLogo").append($("<img />", { "src": '../../../Files/' + idEmpresa + '/logo/' + nameLogo, "style": "width: 100%;height: 100%;" }));
+}
+
+function MontaFeed() {
+
+    var imgFeeds = ["G1_vermelho.png", "G1_vermelho.png", "r7-logo-do-site.jpg", "r7-logo-do-site.jpg"];
+    var feeds = ["Prova da Fuvest foi difícil e notas de corte podem cair, dizem professores", "Fuvest divulga gabarito oficial da prova da 1ª fase",
+        "R7 e COC fazem correção comentada da Fuvest. Siga!", "Após tropeçar em gato e quebrar a perna, candidata faz Fuvest"];
+
+    $("#imgLogoFeed").append($("<img />", { "src": '../../../../../img/' + imgFeeds[0], "style": "width: 100%;height: 100%;" }));
+    $("#noticiaFeed").append($("<label />", { "text": feeds[0] }));
+
+    var index = 0;
+    var intervalFeed = setInterval(function () {
+        index = index == 3 ? 0 : index+1;
+        $("#imgLogoFeed, #noticiaFeed").empty();
+
+        $("#imgLogoFeed").append($("<img />", { "src": '../../../../../img/' + imgFeeds[index], "style": "width: 100%;height: 100%;" }));
+        $("#noticiaFeed").append($("<label />", { "text": feeds[index] }));
+    }, 10000);
+    
 }

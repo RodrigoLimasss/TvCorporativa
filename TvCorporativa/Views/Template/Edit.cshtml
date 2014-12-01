@@ -61,7 +61,7 @@
 
                             foreach (var ponto in pontos)
                             {
-                                <li>@Html.Label(ponto.Nome) - @Html.Label(ponto.Empresa.Nome)</li>
+                                <li>@Html.ActionLink(ponto.Nome + " - " + ponto.Empresa.Nome, "Edit", "Ponto", new { id = ponto.Id}, null)</li>
                             }
                         }
                     </ul>
