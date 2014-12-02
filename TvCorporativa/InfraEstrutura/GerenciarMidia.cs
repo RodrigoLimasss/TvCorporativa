@@ -54,5 +54,13 @@ namespace TvCorporativa.InfraEstrutura
         {
             return Path.Combine(HttpContext.Current.Server.MapPath(string.Format("~/Files/{0}/", idEmpresa)));
         }
+
+        public static void RenameMidiaDirectory(int idEmpresa, string oldFileName, string newFileName)
+        {
+            string oldFilePath = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("~/Files/{0}/", idEmpresa)), oldFileName);
+            string newFilePath = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("~/Files/{0}/", idEmpresa)), newFileName);
+
+            File.Move(oldFilePath, newFilePath);
+        }
     }
 }

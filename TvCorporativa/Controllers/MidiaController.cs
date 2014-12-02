@@ -60,7 +60,14 @@ namespace TvCorporativa.Controllers
         {
             if (ModelState.IsValid)
             {
-                _midiaDao.Save(midia);
+                var midiaOld = _midiaDao.Get(midia.Id);
+                GerenciarMidia.RenameMidiaDirectory(midia.IdEmpresa, midiaOld.Nome + midiaOld.Extensao, midia.Nome + midia.Extensao);
+                
+                midiaOld.Status = midia.Status;
+                midiaOld.Nome = midia.Nome;
+                
+                _midiaDao.Save(midiaOld);
+
                 return RedirectToAction("Index");
             }
             return View(midia);

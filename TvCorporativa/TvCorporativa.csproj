@@ -309,6 +309,10 @@
     <Content Include="Content\FileUpload\img\progressbar.gif" />
     <Content Include="Content\FileUpload\img\progressblue.gif" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\generalFile.png" />
+    <Content Include="Content\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\progressbar.gif" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -316,10 +320,16 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="img\clock.png" />
+    <Content Include="img\custo.png" />
     <Content Include="img\G1_vermelho.png" />
+    <Content Include="img\icon_cube_large.jpg" />
+    <Content Include="img\info_icon.png" />
     <Content Include="img\loading.gif" />
+    <Content Include="img\porquinho.png" />
     <Content Include="img\PrevisaoTempo.JPG" />
     <Content Include="img\progressbar.gif" />
+    <Content Include="img\project.png" />
     <Content Include="img\r7-logo-do-site.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.pt-BR.js" />
@@ -447,7 +457,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>18502</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.1.35:18502/</IISUrl>
+          <IISUrl>http://localhost:18502/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
