@@ -37,7 +37,7 @@ function montaPlayer() {
                 return;
             }
 
-            var arrayVideos = object.playLists[0].midias.map(function (e) { return e.Nome + "." + e.Extensao; });
+            var arrayVideos = object.playLists[0].midias.map(function (e) { return e.Nome + e.Extensao; });
             var index = 0;
 
             $("body").html(template);
