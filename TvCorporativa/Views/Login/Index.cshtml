@@ -5,13 +5,17 @@
 
 <head>
     <title>Login - Tv Corporativa</title>
+    <meta http-equiv="Content-Type" charset="utf-8" content="text/html; charset 'charset=iso-8859-1';" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     @RenderPage("~/Views/Shared/_Head.cshtml")
     <link href="@Url.Content("~/Content/css/Login.css")" rel="stylesheet" />
 </head>
 
 <body>
     <div class="container">
-        <h2 class="form-signin-heading">Bem vindo a Tv Corporativa</h2>
+        <h2 class="form-signin-heading text-center">Bem vindo a Tv Corporativa</h2>
         <form class="form-signin" action="~/Login/Autentica" role="form">
             <h2 class="form-signin-heading">Login</h2>
             <input type="email" name="login" class="form-control" placeholder="E-mail" required="" autofocus="">
