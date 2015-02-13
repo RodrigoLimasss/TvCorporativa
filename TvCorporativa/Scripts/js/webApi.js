@@ -72,7 +72,6 @@ function createPlayerVideo(idEmpresa, video) {
         'id': 'video1',
         'width': '100%',
         'height': '100%',
-        'controls': 'true',
         'poster': '<img src="../../../../../img/loading.gif'
     }).append($('<source/>', { 'src': '../../../Files/' + idEmpresa + '/' + video, 'type': 'video/mp4' })));
 
