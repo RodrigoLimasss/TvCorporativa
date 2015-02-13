@@ -154,6 +154,7 @@
     <Compile Include="Controllers\ApiPlayerController.cs" />
     <Compile Include="Controllers\ApresentacaoController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Controllers\DataTableController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -440,6 +441,7 @@
     <None Include="Scripts\Web.FileUploadGroup.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\DataTable\Index.cshtml" />
     <None Include="Web.Backload.config" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
@@ -464,7 +466,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>18502</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.1.35:18502/</IISUrl>
+          <IISUrl>http://localhost:18502</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
