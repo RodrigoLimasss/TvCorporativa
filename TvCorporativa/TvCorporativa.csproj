@@ -344,6 +344,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ColorBox\jquery.colorbox-min.js" />
     <Content Include="Scripts\ColorBox\jquery.colorbox.js" />
+    <Content Include="Scripts\DataTable\createDataTable.js" />
+    <Content Include="Scripts\DataTable\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTable\responsive.js" />
+    <Content Include="Scripts\DataTable\dataTables.js" />
     <Content Include="Scripts\demos.bootstrap.basicplusui.js" />
     <Content Include="Scripts\FileUpload\angularjs\angular.debug.js" />
     <Content Include="Scripts\FileUpload\backload.demo.js" />
@@ -381,6 +385,9 @@
     <Content Include="Scripts\js\Util.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\js\webApi.js" />
+    <Content Include="Scripts\Require\requireConfig.js" />
+    <Content Include="Scripts\Require\require.js" />
+    <Content Include="Scripts\Require\teste.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
